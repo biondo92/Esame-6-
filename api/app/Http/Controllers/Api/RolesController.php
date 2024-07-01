@@ -28,7 +28,7 @@ class RolesController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
 
-            $roles = Role::with(['descriptions'])->get();
+            $roles = Role::all();
             return response()->json([
                 'status' => 'Ok',
                 "data" => $roles
@@ -61,13 +61,9 @@ class RolesController extends Controller
             $rol->save();
             $rol->refresh();
 
-            foreach ($data["descriptions"] as $value) {
-                $value["roleId"] = $rol->id;
-                $desc = new RoleDescription($value);
-                $desc->save();
-            }
 
-            $role = Role::with(['descriptions'])->find($rol->id);
+
+
             // return response()->json($category);
             return response()->json([
                 'status' => 'Ok',
@@ -97,7 +93,7 @@ class RolesController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $role = Role::with(['descriptions'])->find($id);
+            $role = Role::find($id);
             // return response()->json($role);
             return response()->json([
                 'status' => 'Ok',
@@ -127,13 +123,14 @@ class RolesController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
             $data = request()->input();
-            $role = Role::with(['descriptions'])->find($id);
+            $role = Role::find($id);
 
-            foreach ($role["descriptions"] as $key => $desc) {
-                $desc->update($data["descriptions"][$key]);
-            }
 
-            $role = Role::with(['descriptions'])->find($role->id);
+
+            $role->update($data);
+            $role->save();
+            $role->refresh();
+
             // return response()->json($role);
             return response()->json([
                 'status' => 'Ok',
@@ -163,10 +160,7 @@ class RolesController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $res = RoleDescription::where('roleId', $id)->delete();
-            if ($res) {
-                $res = Role::where('id', $id)->delete();
-            }
+            $res = Role::where('id', $id)->delete();
             if ($res) {
                 return response()->json([
                     'status' => 'No content',

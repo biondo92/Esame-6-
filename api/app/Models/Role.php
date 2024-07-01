@@ -13,14 +13,14 @@ class Role extends Model
     protected $table = "roles";
     protected $primaryKey = "id";
 
-    protected $fillable = [];
+    protected $fillable = [
+        "description"
+    ];
+
+    public $description;
 
     public function users()
     {
         return $this->hasMany(User::class, 'roleId', 'id');
-    }
-    public function descriptions()
-    {
-        return $this->hasMany(RoleDescription::class, 'roleId', 'id');
     }
 }

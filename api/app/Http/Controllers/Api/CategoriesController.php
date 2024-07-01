@@ -27,7 +27,7 @@ class CategoriesController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $categories = Category::with(['descriptions'])->get();
+            $categories = Category::all();
             return response()->json([
                 'status' => 'Ok',
                 "data" => $categories
@@ -36,7 +36,7 @@ class CategoriesController extends Controller
 
         // user
         if (Gate::allows("is_in_role", 2)) {
-            $categories = Category::with(['descriptions'])->get();
+            $categories = Category::all();
             return response()->json([
                 'status' => 'Ok',
                 "data" => $categories
@@ -65,17 +65,11 @@ class CategoriesController extends Controller
             $cat->save();
             $cat->refresh();
 
-            foreach ($data["descriptions"] as $value) {
-                $value["categoryId"] = $cat->id;
-                $desc = new CategoryDescription($value);
-                $desc->save();
-            }
 
-            $category = Category::with(['descriptions'])->find($cat->id);
             // return response()->json($category);
             return response()->json([
                 'status' => 'Ok',
-                "data" => $category
+                "data" => $cat
             ]);
         }
 
@@ -101,7 +95,7 @@ class CategoriesController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $categories = Category::with(['descriptions'])->find($id);
+            $categories = Category::where('id', $id)->first();
             return response()->json([
                 'status' => 'Ok',
                 "data" => $categories
@@ -110,7 +104,7 @@ class CategoriesController extends Controller
 
         // user
         if (Gate::allows("is_in_role", 2)) {
-            $categories = Category::with(['descriptions'])->find($id);
+            $categories = Category::where('id', $id)->first();
             return response()->json([
                 'status' => 'Ok',
                 "data" => $categories
@@ -135,17 +129,15 @@ class CategoriesController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
             $data = request()->input();
-            $cat = Category::with(['descriptions'])->find($id);
+            $cat = Category::where('id', $id)->first();
 
-            foreach ($cat["descriptions"] as $key => $desc) {
-                $desc->update($data["descriptions"][$key]);
-            }
 
-            $category = Category::with(['descriptions'])->find($cat->id);
+
+
             // return response()->json($category);
             return response()->json([
                 'status' => 'Ok',
-                "data" => $category
+                "data" => $cat
             ]);
         }
 
@@ -171,10 +163,7 @@ class CategoriesController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $res = CategoryDescription::where('categoryId', $id)->delete();
-            if ($res) {
-                $res = Category::where('id', $id)->delete();
-            }
+            $res = Category::where('id', $id)->delete();
             if ($res) {
                 return response()->json([
                     'status' => 'No content',

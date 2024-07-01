@@ -12,12 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // generiche
-        Schema::create('languages', function (Blueprint $table) {
-            $table->id("id");
-            $table->string("description");
-            $table->timestamps();
-            $table->softDeletes();
-        });
+
 
         Schema::create('settings', function (Blueprint $table) {
             $table->id("id");
@@ -37,12 +32,14 @@ return new class extends Migration
 
         Schema::create('roles', function (Blueprint $table) {
             $table->id('id');
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
         });
 
         Schema::create('categories', function (Blueprint $table) {
             $table->id("id");
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -56,7 +53,6 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->unsignedBigInteger("roleId")->default(2);
-            $table->unsignedBigInteger("languageId")->default(1);
             $table->double("credits")->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken()->nullable();
@@ -64,7 +60,6 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('roleId')->references('id')->on('roles');
-            $table->foreign('languageId')->references('id')->on('languages');
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -91,7 +86,7 @@ return new class extends Migration
         });
         // fine cache
 
-        
+
 
         // pat
         Schema::create('personal_access_tokens', function (Blueprint $table) {
@@ -106,29 +101,8 @@ return new class extends Migration
         });
         // fine pat
 
-        Schema::create('role_descriptions', function (Blueprint $table) {
-            $table->id('id');
-            $table->unsignedBigInteger('languageId');
-            $table->unsignedBigInteger('roleId');
-            $table->string('description');
-            $table->timestamps();
-            $table->softDeletes();
 
-            $table->foreign('languageId')->references('id')->on('languages');
-            $table->foreign('roleId')->references('id')->on('roles');
-        });
 
-        Schema::create('category_descriptions', function (Blueprint $table) {
-            $table->id('id');
-            $table->unsignedBigInteger('languageId');
-            $table->unsignedBigInteger('categoryId');
-            $table->string('description');
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->foreign('languageId')->references('id')->on('languages');
-            $table->foreign('categoryId')->references('id')->on('categories');
-        });
 
         Schema::create('addresses', function (Blueprint $table) {
             $table->id("id");
@@ -196,13 +170,13 @@ return new class extends Migration
     {
         // utenti
         Schema::dropIfExists('users');
-        
+
 
         // cache
-         Schema::dropIfExists('cache');
-         Schema::dropIfExists('cache_locks');
+        Schema::dropIfExists('cache');
+        Schema::dropIfExists('cache_locks');
 
-        
+
         // pat
         Schema::dropIfExists('personal_access_tokens');
 
@@ -210,15 +184,14 @@ return new class extends Migration
         Schema::dropIfExists('seasons');
         Schema::dropIfExists('series');
         Schema::dropIfExists('films');
-        Schema::dropIfExists('categoryDescriptions');
+
         Schema::dropIfExists('categories');
         Schema::dropIfExists('users_addresses');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('cities');
         Schema::dropIfExists('users');
-        Schema::dropIfExists('roleDescriptions');
+
         Schema::dropIfExists('roles');
         Schema::dropIfExists('settings');
-        Schema::dropIfExists('languages');
     }
 };

@@ -25,7 +25,6 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'roleId',
-        'languageId',
         'credits',
     ];
 
@@ -51,8 +50,8 @@ class User extends Authenticatable implements JWTSubject
             'password' => 'hashed',
         ];
     }
-    
-      /**
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
@@ -71,7 +70,7 @@ class User extends Authenticatable implements JWTSubject
     {
         $role = $this->role()->get();
         return [
-             'role' => $role[0]['id']
+            'role' => $role[0]['id']
             //'role' => $role->id
         ];
     }
