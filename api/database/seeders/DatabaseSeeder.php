@@ -19,12 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Language::create([
-            "description" => "Italiano"
-        ]);
-        Language::create([
-            "description" => "English"
-        ]);
 
         $csv = storage_path("data/cities.csv");
         $file = fopen($csv, "r");
@@ -34,57 +28,11 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        DB::insert("INSERT INTO roles (id) VALUES (DEFAULT),(DEFAULT),(DEFAULT);");
+        DB::insert("INSERT INTO roles (description) VALUES ('Admin'),('User'),('Guest');");
 
-        DB::insert("INSERT INTO categories (id) VALUES (DEFAULT);");
+        DB::insert("INSERT INTO categories (description) VALUES ('Action'),('Fantasy');");
 
-        RoleDescription::create([
-            "roleId" => 1,
-            "languageId" => 1,
-            "description" => "amministratore"
-        ]);
 
-        RoleDescription::create([
-            "roleId" => 1,
-            "languageId" => 2,
-            "description" => "admin"
-        ]);
-
-        RoleDescription::create([
-            "roleId" => 2,
-            "languageId" => 1,
-            "description" => "utente"
-        ]);
-
-        RoleDescription::create([
-            "roleId" => 2,
-            "languageId" => 2,
-            "description" => "user"
-        ]);
-
-        RoleDescription::create([
-            "roleId" => 3,
-            "languageId" => 1,
-            "description" => "ospite"
-        ]);
-
-        RoleDescription::create([
-            "roleId" => 3,
-            "languageId" => 2,
-            "description" => "guest"
-        ]);
-
-        CategoryDescription::create([
-            "categoryId" => 1,
-            "languageId" => 1,
-            "description" => "azione"
-        ]);
-
-        CategoryDescription::create([
-            "categoryId" => 1,
-            "languageId" => 2,
-            "description" => "action"
-        ]);
 
         User::factory()->create([
             "roleId" => 1,
@@ -92,7 +40,7 @@ class DatabaseSeeder extends Seeder
             "lastName" => "test user",
             "email" => "admin@gmail.com",
             "credits" => 0,
-            "languageId" => 1
+
         ]);
 
         User::factory()->create([
@@ -101,7 +49,7 @@ class DatabaseSeeder extends Seeder
             "lastName" => "test user",
             "email" => "user@gmail.com",
             "credits" => 0,
-            "languageId" => 1
+
         ]);
 
         User::factory()->create([
@@ -110,7 +58,7 @@ class DatabaseSeeder extends Seeder
             "lastName" => "test user",
             "email" => "guest@gmail.com",
             "credits" => 0,
-            "languageId" => 1
+
         ]);
     }
 }

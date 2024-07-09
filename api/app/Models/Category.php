@@ -13,12 +13,11 @@ class Category extends Model
     protected $table = "categories";
     protected $primaryKey = "id";
 
-    protected $fillable = [];
+    protected $fillable = [
+        "description"
+    ];
 
-    public function descriptions()
-    {
-        return $this->hasMany(CategoryDescription::class, 'categoryId','id');
-    }
+    public $description;
 
     public function films()
     {
