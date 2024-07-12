@@ -3,13 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppHeaderComponent } from './app-header/app-header.component';
-import { AppSidebarComponent } from './app-sidebar/app-sidebar.component';
-import { AppFooterComponent } from './app-footer/app-footer.component';
-import { AppMainComponent } from './app-main/app-main.component';
-import { AppContentHeaderComponent } from './app-content-header/app-content-header.component';
-import { AppContentComponent } from './app-content/app-content.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppSidebarComponent } from './components/app-sidebar/app-sidebar.component';
+import { AppMainComponent } from './components/app-main/app-main.component';
+import { AppFooterComponent } from './components/app-footer/app-footer.component';
+import { AppSidebarBrandComponent } from './components/app-sidebar-brand/app-sidebar-brand.component';
 
 
 @NgModule({
@@ -17,16 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     AppHeaderComponent,
     AppSidebarComponent,
-    AppFooterComponent,
     AppMainComponent,
-    AppContentHeaderComponent,
-    AppContentComponent
+    AppFooterComponent,
+    AppSidebarBrandComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-   
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

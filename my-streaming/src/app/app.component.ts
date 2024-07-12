@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from './auth-service.service';
+import { AuthService } from './services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,12 @@ import { AuthServiceService } from './auth-service.service';
 })
 export class AppComponent implements OnInit {
   title = 'my-streaming';
- 
+
   /**
    *
    */
-  constructor(private auth: AuthServiceService) {
-    
-  }
+  constructor(private auth: AuthService) { }
+
   ngOnInit(): void {
    this.auth.login("admin@gmail.com","password")
   }
