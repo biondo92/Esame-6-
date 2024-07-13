@@ -9,6 +9,8 @@ import { AppSidebarComponent } from './components/app-sidebar/app-sidebar.compon
 import { AppMainComponent } from './components/app-main/app-main.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { AppSidebarBrandComponent } from './components/app-sidebar-brand/app-sidebar-brand.component';
+import { AppContentHeaderComponent } from './components/app-content-header/app-content-header.component';
+import { AppContentComponent } from './components/app-content/app-content.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { AppSidebarBrandComponent } from './components/app-sidebar-brand/app-sid
     AppMainComponent,
     AppFooterComponent,
     AppSidebarBrandComponent,
+    AppContentHeaderComponent,
+    AppContentComponent,
   ],
   imports: [
     BrowserModule,

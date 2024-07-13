@@ -31,11 +31,12 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/overlayScrollbars/styles/overlayScrollbars.min.css",
               "node_modules/admin-lte/dist/css/adminlte.min.css"
             ],
             "scripts": [
+              "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
               "node_modules/overlayScrollbars/browser/overlayscrollbars.browser.es6.min.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
