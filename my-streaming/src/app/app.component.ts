@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
+import { CategoriesService } from './services/categories.service';
+import { Category } from './models/Category';
 
 
 @Component({
@@ -13,9 +16,18 @@ export class AppComponent implements OnInit {
   /**
    *
    */
-  constructor(private auth: AuthService) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private categories: CategoriesService
+  ) { }
 
-  ngOnInit(): void {
-   this.auth.login("admin@gmail.com","password")
+  data!:Category[]
+  async ngOnInit(): Promise<void> {
+    // this.auth.login("admin@gmail.com", "password")
+    this.data = await this.categories.getList()//.then(res => { this.data = res})
+    setTimeout(()=>{
+      console.log(this.data!)
+    },5000)
   }
 }

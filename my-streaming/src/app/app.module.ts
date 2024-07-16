@@ -11,6 +11,8 @@ import { AppFooterComponent } from './components/app-footer/app-footer.component
 import { AppSidebarBrandComponent } from './components/app-sidebar-brand/app-sidebar-brand.component';
 import { AppContentHeaderComponent } from './components/app-content-header/app-content-header.component';
 import { AppContentComponent } from './components/app-content/app-content.component';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { AppContentComponent } from './components/app-content/app-content.compon
     AppSidebarBrandComponent,
     AppContentHeaderComponent,
     AppContentComponent,
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
