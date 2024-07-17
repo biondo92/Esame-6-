@@ -12,7 +12,8 @@ import { Category } from './models/Category';
 })
 export class AppComponent implements OnInit {
   title = 'my-streaming';
-
+  isAuthenticated: boolean = this.auth.isAuthenticated;
+  isAdmin: boolean = true
   /**
    *
    */
