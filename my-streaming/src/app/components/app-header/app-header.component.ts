@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppHeaderComponent {
 
+  public isAuthenticated(): boolean { 
+    return this.auth.isAuthenticated() 
+  };
+
+  /**
+   *
+   */
+  constructor(protected auth: AuthService) { }
 }

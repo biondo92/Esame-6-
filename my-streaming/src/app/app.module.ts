@@ -12,7 +12,7 @@ import { AppSidebarBrandComponent } from './components/app-sidebar-brand/app-sid
 import { AppContentHeaderComponent } from './components/app-content-header/app-content-header.component';
 import { AppContentComponent } from './components/app-content/app-content.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,13 +25,13 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     AppSidebarBrandComponent,
     AppContentHeaderComponent,
     AppContentComponent,
-    LoginComponent,
-    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,7 +12,9 @@ import { Category } from './models/Category';
 })
 export class AppComponent implements OnInit {
   title = 'my-streaming';
-  isAuthenticated: boolean = this.auth.isAuthenticated;
+  public isAuthenticated(): boolean { 
+    return this.auth.isAuthenticated() 
+  };
   isAdmin: boolean = true
   /**
    *
@@ -26,9 +28,9 @@ export class AppComponent implements OnInit {
   data!:Category[]
   async ngOnInit(): Promise<void> {
     // this.auth.login("admin@gmail.com", "password")
-    this.data = await this.categories.getList()//.then(res => { this.data = res})
-    setTimeout(()=>{
-      console.log(this.data!)
-    },5000)
+    // this.data = await this.categories.getList()
+    console.log({
+      isAuthenticated: this.auth.isAuthenticated()
+    })
   }
 }
