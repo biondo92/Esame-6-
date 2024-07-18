@@ -18,7 +18,7 @@ export class CategoriesService {
     return new Promise((resolve, obj)=>{
       this.http.get(this._baseUrl,{
         headers:{
-          "Authorization":"Bearer " + this.auth.token
+          "Authorization":"Bearer " + this.auth.getToken()
         }
       })
       .subscribe(res => resolve((res as ApiResponse<Category[]>).data!))

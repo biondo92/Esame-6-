@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CategoriesService } from './services/categories.service';
 import { Category } from './models/Category';
 
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     return this.auth.isAuthenticated() 
   };
   isAdmin: boolean = true
+  public isRenderingLoginPage: boolean = false
   /**
    *
    */
@@ -29,8 +30,20 @@ export class AppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     // this.auth.login("admin@gmail.com", "password")
     // this.data = await this.categories.getList()
+    
     console.log({
       isAuthenticated: this.auth.isAuthenticated()
     })
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.router.url === '/login') {
+          this.isRenderingLoginPage = true
+        }
+        else{
+          this.isRenderingLoginPage = false
+        }
+      }
+    });
   }
 }

@@ -11,15 +11,47 @@ import { ApiResponse } from '../models/ApiResponse';
 })
 export class AuthService {
   private _baseUrl: string = environment.URL_BE + "/api/auth";
-
-  constructor(private http: HttpClient) { }
-
-  public token?: string
-  public user?: User
+  private token?: string
+  private user?: User
+  
+  constructor(private http: HttpClient) { 
+    let json = localStorage.getItem("LoginStatus")
+    if(json !== null && json !== undefined){
+      let status = (JSON.parse(json) as LoginStatus)
+      this.token = status.token
+      this.user = status.user
+    }
+  }
 
   public isAuthenticated(): boolean
   {
+    let json = localStorage.getItem("LoginStatus")
+    if(json !== null && json !== undefined){
+      let status = (JSON.parse(json) as LoginStatus)
+      this.token = status.token
+      this.user = status.user
+    }
     return this.user !== null && this.user !== undefined 
+  }
+
+  public getUser(): User{
+    let json = localStorage.getItem("LoginStatus")
+    if(json !== null && json !== undefined){
+      let status = (JSON.parse(json) as LoginStatus)
+      this.token = status.token
+      this.user = status.user
+    }
+    return this.user!
+  }
+
+  public getToken(): string{
+    let json = localStorage.getItem("LoginStatus")
+    if(json !== null && json !== undefined){
+      let status = (JSON.parse(json) as LoginStatus)
+      this.token = status.token
+      this.user = status.user
+    }
+    return this.token!
   }
 
   public async login(userName: string, password: string): Promise<void> {
@@ -29,7 +61,6 @@ export class AuthService {
         password: password
       })
       .subscribe(res => {
-        console.log(res)
         this.token = (res as any).access_token;
   
         this.http.get(this._baseUrl + "/me", {
@@ -38,9 +69,12 @@ export class AuthService {
           }
         })
         .subscribe(res => {
-          console.log(res)
           this.user = (res as ApiResponse<User>).data
           this.user!.fullname = this.user?.name + " " + this.user?.lastName
+
+          let status = new LoginStatus(this.token!, this.user!)
+          localStorage.setItem("LoginStatus", JSON.stringify(status))
+
           resolve()
         })
       })
@@ -58,9 +92,23 @@ export class AuthService {
         console.log(res)
         this.user = undefined
         this.token = undefined
+        localStorage.removeItem("LoginStatus")
         resolve()
       })
     })
+  }
+}
+
+class LoginStatus{
+  public token!: string
+  public user!:User
+
+  /**
+   *
+   */
+  constructor(token: string, user: User) {
+    this.token = token
+    this.user = user
   }
 }
 

@@ -13,6 +13,7 @@ import { AppContentHeaderComponent } from './components/app-content-header/app-c
 import { AppContentComponent } from './components/app-content/app-content.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     AppSidebarBrandComponent,
     AppContentHeaderComponent,
     AppContentComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

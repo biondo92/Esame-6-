@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,12 +10,19 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AppHeaderComponent {
 
+  public user!:User
   public isAuthenticated(): boolean { 
     return this.auth.isAuthenticated() 
   };
 
+  public logout(): void{
+    this.auth.logout()
+  }
+
   /**
    *
    */
-  constructor(protected auth: AuthService) { }
+  constructor(private auth: AuthService,protected router:Router) { 
+    this.user = this.auth.getUser()
+  }
 }

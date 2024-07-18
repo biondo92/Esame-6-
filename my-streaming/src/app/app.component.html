@@ -1,3 +1,37 @@
-<app-main>
+<!-- <app-main *ngIf="!this.isRenderingLoginPage else login">
   <router-outlet></router-outlet>
-</app-main>
+</app-main> -->
+
+<div *ngIf="!this.isRenderingLoginPage else login" class="app-wrapper">
+
+  <app-header></app-header>
+
+  <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+      <app-sidebar-brand></app-sidebar-brand>
+
+      <div *ngIf="true" class="sidebar-wrapper">
+          <app-sidebar></app-sidebar>
+      </div>
+  </aside>
+
+  <!--begin::App Main-->
+  <main class="app-main">
+      <app-content-header *ngIf="this.isAuthenticated()"></app-content-header>
+      <!--begin::App Content-->
+      <div class="app-content"> <!--begin::Container-->
+        <div class="container-fluid"> <!--begin::Row-->
+            <!-- <ng-content></ng-content> -->
+            <router-outlet></router-outlet>
+        </div> <!--end::Container-->
+    </div> 
+    <!--end::App Content-->
+  </main>
+  <!--end::App Main-->
+
+  <app-footer></app-footer>
+
+</div>
+
+<ng-template #login>
+  <app-login></app-login>
+</ng-template>
