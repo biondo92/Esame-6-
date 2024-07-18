@@ -13,30 +13,29 @@ export class AuthService {
   private _baseUrl: string = environment.URL_BE + "/api/auth";
   private token?: string
   private user?: User
-  
-  constructor(private http: HttpClient) { 
+
+  constructor(private http: HttpClient) {
     let json = localStorage.getItem("LoginStatus")
-    if(json !== null && json !== undefined){
+    if (json !== null && json !== undefined) {
       let status = (JSON.parse(json) as LoginStatus)
       this.token = status.token
       this.user = status.user
     }
   }
 
-  public isAuthenticated(): boolean
-  {
+  public isAuthenticated(): boolean {
     let json = localStorage.getItem("LoginStatus")
-    if(json !== null && json !== undefined){
+    if (json !== null && json !== undefined) {
       let status = (JSON.parse(json) as LoginStatus)
       this.token = status.token
       this.user = status.user
     }
-    return this.user !== null && this.user !== undefined 
+    return this.user !== null && this.user !== undefined
   }
 
-  public getUser(): User{
+  public getUser(): User {
     let json = localStorage.getItem("LoginStatus")
-    if(json !== null && json !== undefined){
+    if (json !== null && json !== undefined) {
       let status = (JSON.parse(json) as LoginStatus)
       this.token = status.token
       this.user = status.user
@@ -44,9 +43,9 @@ export class AuthService {
     return this.user!
   }
 
-  public getToken(): string{
+  public getToken(): string {
     let json = localStorage.getItem("LoginStatus")
-    if(json !== null && json !== undefined){
+    if (json !== null && json !== undefined) {
       let status = (JSON.parse(json) as LoginStatus)
       this.token = status.token
       this.user = status.user
@@ -55,53 +54,62 @@ export class AuthService {
   }
 
   public async login(userName: string, password: string): Promise<void> {
-    return new Promise((resolve, obj) =>{
+    return new Promise((resolve, obj) => {
       this.http.post(this._baseUrl + "/login", {
         email: userName,
         password: password
       })
-      .subscribe(res => {
-        this.token = (res as any).access_token;
-  
-        this.http.get(this._baseUrl + "/me", {
-          headers: {
-            "Authorization": "Bearer "+ this.token
-          }
-        })
         .subscribe(res => {
-          this.user = (res as ApiResponse<User>).data
-          this.user!.fullname = this.user?.name + " " + this.user?.lastName
+          this.token = (res as any).access_token;
 
-          let status = new LoginStatus(this.token!, this.user!)
-          localStorage.setItem("LoginStatus", JSON.stringify(status))
+          this.http.get(this._baseUrl + "/me", {
+            headers: {
+              "Authorization": "Bearer " + this.token
+            }
+          })
+            .subscribe(res => {
+              this.user = (res as ApiResponse<User>).data
+              this.user!.fullname = this.user?.name + " " + this.user?.lastName
 
-          resolve()
+              let status = new LoginStatus(this.token!, this.user!)
+              localStorage.setItem("LoginStatus", JSON.stringify(status))
+
+              resolve()
+            })
         })
-      })
     })
   }
 
   public async logout(): Promise<void> {
-    return new Promise((resolve, obj) =>{
-      this.http.get(this._baseUrl + "/logout", {
-        headers: {
-          "Authorization": "Bearer "+ this.token
-        }
-      })
-      .subscribe(res => {
-        console.log(res)
+    return new Promise((resolve, obj) => {
+      try {
+        this.http.get(this._baseUrl + "/logout", {
+          headers: {
+            "Authorization": "Bearer " + this.token
+          }
+        })
+          .subscribe(res => {
+            console.log(res)
+            this.user = undefined
+            this.token = undefined
+            resolve()
+          })
+      }
+      catch (e) {
+
+      }
+      finally {
         this.user = undefined
         this.token = undefined
         localStorage.removeItem("LoginStatus")
-        resolve()
-      })
+      }
     })
   }
 }
 
-class LoginStatus{
+class LoginStatus {
   public token!: string
-  public user!:User
+  public user!: User
 
   /**
    *
@@ -115,11 +123,5 @@ class LoginStatus{
 export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
 
   const isLogged = inject(AuthService).isAuthenticated();
-
-  // if (!isLogged) {
-  //   const router = inject(Router);
-  //   router.navigate(['/', 'login']);
-  // }
-
   return isLogged
 }

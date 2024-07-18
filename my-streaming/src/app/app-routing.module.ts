@@ -4,18 +4,22 @@ import { AuthGuard, AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    title: "Home",
+    component: HomeComponent
   },
   {
     path: 'login',
+    title: "Login",
     component: LoginComponent,
   },
   {
     path: 'profile',
+    title: "Profilo",
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
