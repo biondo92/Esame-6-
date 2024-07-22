@@ -1,5 +1,6 @@
 import { last } from "rxjs"
 import { Role } from "./Role"
+import { Address } from "./Address"
 
 export class User {
     public id?: number
@@ -11,6 +12,7 @@ export class User {
     public credits?:number
     public emailVerified?:boolean
     public role?:Role
+    public addresses?:Address[]
   
 
     constructor() { }

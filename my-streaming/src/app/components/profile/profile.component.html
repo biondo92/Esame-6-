@@ -20,4 +20,61 @@
             <input type="text" class="form-control" [(ngModel)]="user!.lastName" name="lastName">
         </div>
     </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label class="control-label">
+                Email
+            </label>
+            <br>
+            <input type="email" class="form-control" [(ngModel)]="user!.email" name="email">
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label class="control-label">
+                Credits
+            </label>
+            <br>
+            <input type="text" class="form-control" [(ngModel)]="user!.credits" name="credits">
+        </div>
+    </div>
+    
+</div>
+<br>
+<div class="row">
+    
+    <div class="col-6">
+        <div class="form-group">
+            <button class="btn btn-primary" (click)="onSubmit()">Salva</button>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+<div *ngIf="this.user!.addresses !== undefined" class="row">
+    <div class="col">
+        <table class="table-responsive w-100">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>PostalCode</th>
+                    <th>State</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of this.user!.addresses">
+                    <td>{{row.id}}</td>
+                    <td>{{row.address}}</td>
+                    <td>{{row.cityId}}</td>
+                    <td>{{row.postalCode}}</td>
+                    <td>{{row.state}}</td>
+                    <td>{{row.id}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

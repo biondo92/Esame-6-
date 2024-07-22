@@ -28,7 +28,13 @@ class AddressesController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $address = Address::with(['city', 'user'])->get();
+            if (!empty(request()->query('userId'))) {
+
+                $address = Address::with(['city', 'user'])->where("userId",request()->query("userId"))->get();
+             }else{
+                $address = Address::with(['city', 'user'])->get();
+             }
+            
             return response()->json([
                 'status' => 'Ok',
                 "data" => $address
