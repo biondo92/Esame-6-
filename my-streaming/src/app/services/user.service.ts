@@ -18,17 +18,12 @@ export class UserService {
 
   public update(user: User): Promise<boolean> {
     return new Promise((resolve, obj) => {
-      this.http.put(this._baseUrl +"/"+user.id, user
-        
-      , {
+      this.http.put(this._baseUrl + "/" + user.id, user, {
         headers: {
-
           "Authorization": "Bearer " + this.auth.getToken()
         }
-
-
       })
-        .subscribe(res => resolve((res as ApiResponse<User[]>).status ==="Ok"))
+        .subscribe(res => resolve((res as ApiResponse<User[]>).status === "Ok"))
     })
   }
 }
