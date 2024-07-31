@@ -38,7 +38,7 @@
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
               "node_modules/overlayScrollbars/browser/overlayscrollbars.browser.es6.min.js",
-              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/@popperjs/core/dist/esm/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/admin-lte/dist/js/adminlte.min.js",
               "src/assets/js/overlayScrollbars.js"

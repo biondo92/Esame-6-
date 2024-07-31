@@ -1,99 +1,170 @@
-<div class="row">
+<div class="card card-primary card-outline shadow-lg mb-4">
+    <div class="card-header">
+        <div class="card-title">Gestione Profilo</div>
+    </div>
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="true">Profilo</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="addresses-tab" data-bs-toggle="tab" data-bs-target="#addresses"
+                    type="button" role="tab" aria-controls="addresses" aria-selected="false">Indirizzi</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="container-fluid">
+                    <div class="row mb-3">
 
-    <div class="col-6">
-        <div class="form-group">
-            <label class="control-label">
-                Name
-            </label>
-            <br>
-            <input type="text" class="form-control" [(ngModel)]="user!.name" name="name">
-        </div>
-    </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Name
+                                </label>
+                                <br>
+                                <input type="text" class="form-control" [(ngModel)]="user!.name" name="name">
+                            </div>
+                        </div>
 
-    <div class="col-6">
-        <div class="form-group">
-            <label class="control-label">
-                Lastname
-            </label>
-            <br>
-            <input type="text" class="form-control" [(ngModel)]="user!.lastName" name="lastName">
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="form-group">
-            <label class="control-label">
-                Email
-            </label>
-            <br>
-            <input type="email" class="form-control" [(ngModel)]="user!.email" name="email">
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="form-group">
-            <label class="control-label">
-                Credits
-            </label>
-            <br>
-            <input type="text" class="form-control" [(ngModel)]="user!.credits" name="credits">
-        </div>
-    </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Lastname
+                                </label>
+                                <br>
+                                <input type="text" class="form-control" [(ngModel)]="user!.lastName" name="lastName">
+                            </div>
+                        </div>
 
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Email
+                                </label>
+                                <br>
+                                <input type="email" class="form-control" [(ngModel)]="user!.email" name="email">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Credits
+                                </label>
+                                <br>
+                                <input type="text" class="form-control" [(ngModel)]="user!.credits" name="credits">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <button class="btn btn-success" (click)="UpdateUserProfile()">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="addresses" role="tabpanel" aria-labelledby="addresses-tab">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col pt-3">
+                            <button class="btn btn-primary mb-3" (click)="openAddressModal('Add Address')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <table *ngIf="this.user!.addresses !== undefined" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Indirizzo</th>
+                                        <th>Città</th>
+                                        <th>CAP</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of this.user!.addresses">
+                                        <td width="5%">{{row.id}}</td>
+                                        <td width="65%">{{row.address}}</td>
+                                        <td width="10%">{{cityName(row.cityId)}}</td>
+                                        <td width="10%">{{row.postalCode}}</td>
+                                        <td width="10%">
+                                            <button class="btn btn-primary"
+                                                (click)="openAddressModal('Edit Address', row.id)">
+                                                <i class="fas fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-danger ms-2" (click)="removeAddress(row.id)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
-<br>
-<div class="row">
 
-    <div class="col-6">
-        <div class="form-group">
-            <button class="btn btn-primary" (click)="onSubmit()">Salva</button>
-        </div>
-    </div>
-</div>
-<br>
-<br>
-
-<div class="row">
-    <div class="col">
-        <button class="btn btn-primary" (click)="addAddress()">
-            <i class="fas fa-plus"></i>
-        </button>
-        <table *ngIf="this.user!.addresses !== undefined" class="table-responsive w-100">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>PostalCode</th>
-                    <th>State</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let row of this.user!.addresses">
-                    <td>{{row.id}}</td>
-                    <td>{{row.address}}</td>
-                    <td>{{row.cityId}}</td>
-                    <td>{{row.postalCode}}</td>
-                    <td>{{row.state}}</td>
-                    <td>{{row.id}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div id="address-form" class="modal" tabindex="-1">
+<div id="modal-address" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{addressFormTitle}}</h5>
+                <h5 class="modal-title">{{modalTitle}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                <form id="form-address">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Indirizzo
+                                    </label>
+                                    <br>
+                                    <input type="text" class="form-control" [(ngModel)]="address!.address"
+                                        name="address">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Città
+                                    </label>
+                                    <br>
+                                    <select class="form-select" [(ngModel)]="address!.cityId" name="cityId">
+                                        <option value="0">Seleziona Città</option>
+                                        <option *ngFor="let city of this.cities" value="{{city.id}}">{{city.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        CAP
+                                    </label>
+                                    <br>
+                                    <input type="text" class="form-control" [(ngModel)]="address!.postalCode"
+                                        name="postalCode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="onSubmitAddress()">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-success" (click)="AddOrUpdateAddress()">Salva</button>
             </div>
         </div>
     </div>

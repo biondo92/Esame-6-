@@ -27,8 +27,7 @@ export class AddressesService {
         }
       })
       .subscribe(res => resolve((res as ApiResponse<Address[]>).data!))
-    })
-    
+    })    
   }
 
   public getCities(): Promise<City[]> {
@@ -54,6 +53,38 @@ export class AddressesService {
       })
       .subscribe(res => resolve((res as ApiResponse<City[]>).data!))
     })
-    
+  }
+
+  public addAddress(model: Address): Promise<Address>{
+    return new Promise((resolve, obj)=>{
+      this.http.post(this._baseUrl + "/add", model, {
+        headers:{
+          "Authorization":"Bearer " + this.auth.getToken()
+        }
+      })
+      .subscribe(res => resolve((res as ApiResponse<Address>).data!))
+    })
+  }
+
+  public updateAddress(model: Address): Promise<Address>{
+    return new Promise((resolve, obj)=>{
+      this.http.put(this._baseUrl + "/" + model.id, model, {
+        headers:{
+          "Authorization":"Bearer " + this.auth.getToken()
+        }
+      })
+      .subscribe(res => resolve((res as ApiResponse<Address>).data!))
+    })
+  }
+
+  public deleteAddress(id: number): Promise<boolean>{
+    return new Promise((resolve, obj)=>{
+      this.http.delete(this._baseUrl + "/" + id, {
+        headers:{
+          "Authorization":"Bearer " + this.auth.getToken()
+        }
+      })
+      .subscribe(res => resolve(true))
+    })
   }
 }
