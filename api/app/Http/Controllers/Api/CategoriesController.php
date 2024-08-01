@@ -61,7 +61,7 @@ class CategoriesController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
             $data = request()->input();
-            $cat = new Category();
+            $cat = new Category($data);
             $cat->save();
             $cat->refresh();
 
@@ -131,6 +131,9 @@ class CategoriesController extends Controller
             $data = request()->input();
             $cat = Category::where('id', $id)->first();
 
+            $cat->update($data);
+            $cat->save();
+            $cat->refresh();
 
 
 

@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   protected user?: User
   @Input()
   protected address?: Address = new Address()
+  
   protected modalTitle?: string
   protected cities?: City[]
   protected modal?: Modal

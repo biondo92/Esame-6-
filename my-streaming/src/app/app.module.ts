@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     LoginComponent,
     ProfileComponent,
     HomeComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,12 @@ const routes: Routes = [
     path: 'profile',
     title: "Profilo",
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'categories',
+    title: "Categorie",
+    component: CategoriesComponent,
     canActivate: [AuthGuard]
   },
 ];
