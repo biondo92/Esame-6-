@@ -9,21 +9,27 @@ import { ApiResponse } from '../models/ApiResponse';
   providedIn: 'root'
 })
 export class RolesService {
+  update(arg0: Role) {
+    throw new Error('Method not implemented.');
+  }
+  add(arg0: Role) {
+    throw new Error('Method not implemented.');
+  }
 
   private _baseUrl: string = environment.URL_BE + "/api/roles"
 
-  
+
   constructor(private auth: AuthService, private http: HttpClient) { }
 
   public getList(): Promise<Role[]> {
-    return new Promise((resolve, obj)=>{
-      this.http.get(this._baseUrl,{
-        headers:{
-          "Authorization":"Bearer " + this.auth.getToken()
+    return new Promise((resolve, obj) => {
+      this.http.get(this._baseUrl, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
         }
       })
-      .subscribe(res => resolve((res as ApiResponse<Role[]>).data!))
+        .subscribe(res => resolve((res as ApiResponse<Role[]>).data!))
     })
-    
+
   }
 }

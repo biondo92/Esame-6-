@@ -30,6 +30,12 @@ const routes: Routes = [
     component: CategoriesComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'roles',
+    title: "Ruoli",
+    component: CategoriesComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

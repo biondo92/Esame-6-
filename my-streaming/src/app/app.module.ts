@@ -14,6 +14,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { RolesComponent } from './conponents/roles/roles.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
     ProfileComponent,
     HomeComponent,
     BreadcrumbComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    RolesComponent
   ],
   imports: [
     BrowserModule,
