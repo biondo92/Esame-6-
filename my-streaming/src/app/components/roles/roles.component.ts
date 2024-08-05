@@ -15,13 +15,14 @@ export class RolesComponent implements OnInit {
   protected modal?: Modal
   protected model?: Role = new Role
   protected roles?: Role[]
-  rolService: any;
 
-  constructor(private auth: AuthService, private catService: RolesService) {
+
+
+  constructor(private auth: AuthService, private rolService: RolesService) {
 
   }
   async ngOnInit(): Promise<void> {
-    this.roles = await this.catService.getList()
+    this.roles = await this.rolService.getList()
     this.modal = Modal.getOrCreateInstance('#modal-role')
   }
 

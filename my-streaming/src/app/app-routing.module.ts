@@ -36,6 +36,12 @@ const routes: Routes = [
     component: CategoriesComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'cities',
+    title: "Città",
+    component: CategoriesComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

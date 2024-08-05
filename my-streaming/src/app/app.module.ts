@@ -14,7 +14,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { RolesComponent } from './conponents/roles/roles.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { CitiesComponent } from './components/cities/cities.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RolesComponent } from './conponents/roles/roles.component';
     HomeComponent,
     BreadcrumbComponent,
     CategoriesComponent,
-    RolesComponent
+    RolesComponent,
+    CitiesComponent
   ],
   imports: [
     BrowserModule,
