@@ -6,6 +6,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { CitiesComponent } from './components/cities/cities.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -33,15 +36,21 @@ const routes: Routes = [
   {
     path: 'roles',
     title: "Ruoli",
-    component: CategoriesComponent,
+    component: RolesComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'cities',
     title: "Città",
-    component: CategoriesComponent,
+    component: CitiesComponent,
+    canActivate: [AuthGuard]
+  }, {
+    path: 'settings',
+    title: "Impostazioni",
+    component: SettingsComponent,
     canActivate: [AuthGuard]
   },
+
 ];
 
 @NgModule({

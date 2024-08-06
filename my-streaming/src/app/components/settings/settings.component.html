@@ -1,0 +1,75 @@
+<div class="card card-primary card-outline shadow-lg mb-4">
+    <div class="card-header">
+        <div class="card-title">Gestione Impostazioni</div>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col pt-3">
+                <button class="btn btn-primary mb-3" (click)="openModal('Add Setting')">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <table *ngIf="this.settings !== undefined" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Descrizione</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of this.settings">
+                            <td width="5%">{{row.id}}</td>
+                            <td width="85%">{{row.description}}</td>
+                            <td width="10%">
+                                <button class="btn btn-primary" (click)="openModal('Edit Setting', row.id)">
+                                    <i class="fas fa-pencil"></i>
+                                </button>
+                                <button class="btn btn-danger ms-2" (click)="removeSetting(row.id)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<div id="modal-setting" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{modalTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-setting">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Descrizione
+                                    </label>
+                                    <br>
+                                    <input type="text" class="form-control" [(ngModel)]="model!.description"
+                                        name="description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-success" (click)="AddOrUpdate()">Salva</button>
+            </div>
+        </div>
+    </div>
+</div>

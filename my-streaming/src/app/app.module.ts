@@ -16,6 +16,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { CategoriesComponent } from './components/categories/categories.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { CitiesComponent } from './components/cities/cities.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CitiesComponent } from './components/cities/cities.component';
     BreadcrumbComponent,
     CategoriesComponent,
     RolesComponent,
-    CitiesComponent
+    CitiesComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -25,4 +25,37 @@ export class SettingsService {
     })
 
   }
+
+  public add(model: Setting): Promise<Setting> {
+    return new Promise((resolve, obj) => {
+      this.http.post(this._baseUrl + "/add", model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Setting>).data!))
+    })
+  }
+
+  public update(model: Setting): Promise<Setting> {
+    return new Promise((resolve, obj) => {
+      this.http.put(this._baseUrl + "/" + model.id, model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Setting>).data!))
+    })
+  }
+
+  public delete(id: number): Promise<boolean> {
+    return new Promise((resolve, obj) => {
+      this.http.delete(this._baseUrl + "/" + id, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve(true))
+    })
+  }
 }

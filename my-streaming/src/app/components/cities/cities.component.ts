@@ -17,9 +17,6 @@ export class CitiesComponent implements OnInit {
   protected model?: City = new City
   protected cities?: City[]
 
-
-
-
   constructor(private auth: AuthService, private citService: CitiesService) {
 
 
