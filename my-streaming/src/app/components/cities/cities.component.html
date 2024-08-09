@@ -19,7 +19,7 @@
                     <tbody>
                         <tr *ngFor="let row of this.cities">
                             <td width="5%">{{row.id}}</td>
-                            <td width="85%">{{row.description}}</td>
+                            <td width="85%">{{row.name}}</td>
                             <td width="10%">
                                 <button class="btn btn-primary" (click)="openModal('Edit City', row.id)">
                                     <i class="fas fa-pencil"></i>
@@ -55,11 +55,10 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="control-label">
-                                        Descrizione
+                                        Nome
                                     </label>
                                     <br>
-                                    <input type="text" class="form-control" [(ngModel)]="model!.description"
-                                        name="description">
+                                    <input type="text" class="form-control" [(ngModel)]="model!.name" name="name">
                                 </div>
                             </div>
                         </div>

@@ -9,6 +9,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { RolesComponent } from './components/roles/roles.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,12 @@ const routes: Routes = [
     path: 'settings',
     title: "Impostazioni",
     component: SettingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'users',
+    title: "Utenti",
+    component: UsersComponent,
     canActivate: [AuthGuard]
   },
 

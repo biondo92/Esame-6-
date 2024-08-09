@@ -57,7 +57,7 @@ class RolesController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
             $data = request()->input();
-            $rol = new Role();
+            $rol = new Role($data);
             $rol->save();
             $rol->refresh();
 
@@ -67,7 +67,7 @@ class RolesController extends Controller
             // return response()->json($category);
             return response()->json([
                 'status' => 'Ok',
-                "data" => $role
+                "data" => $rol
             ]);
         }
 

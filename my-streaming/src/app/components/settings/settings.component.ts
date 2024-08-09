@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.settings = await this.setService.getList()
-    this.modal = Modal.getOrCreateInstance('#modal-seting')
+    this.modal = Modal.getOrCreateInstance('#modal-setting')
   }
 
   public openModal(modalTitle: string, settingId: number = 0): void {

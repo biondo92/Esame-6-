@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   protected user?: User
   @Input()
   protected address?: Address = new Address()
-  
+
   protected modalTitle?: string
   protected cities?: City[]
   protected modal?: Modal
@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
   public async UpdateUserProfile(): Promise<void> {
     this.userService.update(this.user!).then(res => {
-      if (res === true) {
+      if (res !== null && res !== undefined) {
         alert("Profilo utente aggiornato con successo")
       } else {
         alert("Si è verificato un errore durante l'aggiornamento del profilo utente")
@@ -52,11 +52,11 @@ export class ProfileComponent implements OnInit {
   public openAddressModal(modalTitle: string, addressId: number = 0): void {
     this.modalTitle = modalTitle
 
-    if(addressId == 0){
+    if (addressId == 0) {
       this.address = new Address()
       this.address.userId = this.user?.id
     }
-    else{
+    else {
       this.address = this.user?.addresses?.find(address => {
         return address.id == addressId
       })
@@ -65,30 +65,30 @@ export class ProfileComponent implements OnInit {
   }
 
   public async AddOrUpdateAddress(): Promise<void> {
-    if(this.address?.id == 0 || this.address!.id == undefined){
+    if (this.address?.id == 0 || this.address!.id == undefined) {
       this.addressesService.addAddress(this.address!)
-      .then(res => { 
-        this.user?.addresses?.push(res)
-        this.modal?.hide()
-        alert("Indirizzo aggiunto con successo")
-      })
+        .then(res => {
+          this.user?.addresses?.push(res)
+          this.modal?.hide()
+          alert("Indirizzo aggiunto con successo")
+        })
     }
-    else{
+    else {
       this.addressesService.updateAddress(this.address!)
-      .then(res => {
-        this.user!.addresses = this.user?.addresses?.filter(add => add.id !== res.id)
-        this.user!.addresses?.push(res)
-        this.modal?.hide()
-        alert("Indirizzo aggiornato con successo")
-      })
+        .then(res => {
+          this.user!.addresses = this.user?.addresses?.filter(add => add.id !== res.id)
+          this.user!.addresses?.push(res)
+          this.modal?.hide()
+          alert("Indirizzo aggiornato con successo")
+        })
     }
   }
 
   public async removeAddress(id: number = 0): Promise<void> {
     this.addressesService.deleteAddress(id)
-    .then(res => {
-      this.user!.addresses = this.user?.addresses?.filter(add => add.id !== id)
-      alert("Indirizzo rimosso con successo")
-    })
+      .then(res => {
+        this.user!.addresses = this.user?.addresses?.filter(add => add.id !== id)
+        alert("Indirizzo rimosso con successo")
+      })
   }
 }

@@ -12,14 +12,18 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Descrizione</th>
+                            <th>Codice</th>
+                            <th>Chiave</th>
+                            <th>Valore</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let row of this.settings">
                             <td width="5%">{{row.id}}</td>
-                            <td width="85%">{{row.description}}</td>
+                            <td width="15%">{{row.code}}</td>
+                            <td width="20%">{{row.key}}</td>
+                            <td width="50%">{{row.value}}</td>
                             <td width="10%">
                                 <button class="btn btn-primary" (click)="openModal('Edit Setting', row.id)">
                                     <i class="fas fa-pencil"></i>
@@ -55,12 +59,29 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="control-label">
-                                        Descrizione
+                                        Codice
                                     </label>
                                     <br>
-                                    <input type="text" class="form-control" [(ngModel)]="model!.description"
-                                        name="description">
+                                    <input type="text" class="form-control" [(ngModel)]="model!.code" name="code">
                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Chiave
+                                    </label>
+                                    <br>
+                                    <input type="text" class="form-control" [(ngModel)]="model!.key" name="key">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Valore
+                                </label>
+                                <br>
+                                <input type="text" class="form-control" [(ngModel)]="model!.value" name="value">
                             </div>
                         </div>
                     </div>
