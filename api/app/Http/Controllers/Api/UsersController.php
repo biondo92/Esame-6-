@@ -57,6 +57,9 @@ class UsersController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
             $data = request()->input();
+            if (!isset($data["password"])) {
+                $data["password"] = "password";
+            }
             $rol = new User($data);
             $rol->save();
             $rol->refresh();
@@ -171,15 +174,14 @@ class UsersController extends Controller
         // admin
         if (Gate::allows("is_in_role", 1)) {
             $res = Address::where('userId', $id)->delete();
-            if ($res) {
-                $res = User::where('id', $id)->delete();
-            }
-            if ($res) {
-                return response()->json([
-                    'status' => 'No content',
-                    "data" => null
-                ], 204);
-            }
+
+            $res = User::where('id', $id)->delete();
+
+
+            return response()->json([
+                'status' => 'No content',
+                "data" => null
+            ], 204);
         }
 
         // user

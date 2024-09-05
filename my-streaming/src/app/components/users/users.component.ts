@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Modal } from 'bootstrap';
 import { Address } from 'src/app/models/Address';
+import { City } from 'src/app/models/City';
 import { Role } from 'src/app/models/Role';
 import { User } from 'src/app/models/User';
 import { AddressesService } from 'src/app/services/addresses.service';
@@ -24,7 +25,9 @@ export class UsersComponent implements OnInit {
   protected model?: User = new User
   protected users?: User[]
   protected roles?: Role[]
-  protected address?: Address
+  protected address?: Address = new Address
+  protected cities?: City[]
+
   constructor(private auth: AuthService, private useService: UserService, private rolService: RolesService, private addServices: AddressesService) {
 
 
@@ -35,6 +38,8 @@ export class UsersComponent implements OnInit {
     this.roles = await this.rolService.getList()
     this.modal = Modal.getOrCreateInstance('#modal-user')
     this.addressModal = Modal.getOrCreateInstance('#modal-address')
+    this.addServices.getCities().then(res => this.cities = res)
+    console.log(this.users)
   }
   public getFullName(user: User): string {
     return user.name + ' ' + user.lastName
@@ -59,6 +64,32 @@ export class UsersComponent implements OnInit {
         this.users = this.users?.filter(add => add.id !== id)
         alert("Utente rimosso con successo")
       })
+  }
+
+  public cityName(id: number = 0): string {
+    return this.cities?.find(city => {
+      return city.id == id
+    })?.name ?? ""
+  }
+
+  public async AddOrUpdateAddress(): Promise<void> {
+    if (this.address?.id == 0 || this.address!.id == undefined) {
+      this.addServices.addAddress(this.address!)
+        .then(res => {
+          this.model?.addresses?.push(res)
+          this.addressModal?.hide()
+          alert("Indirizzo aggiunto con successo")
+        })
+    }
+    else {
+      this.addServices.updateAddress(this.address!)
+        .then(res => {
+          this.model!.addresses = this.model?.addresses?.filter(add => add.id !== res.id)
+          this.model!.addresses?.push(res)
+          this.addressModal?.hide()
+          alert("Indirizzo aggiornato con successo")
+        })
+    }
   }
 
   public async AddOrUpdate(): Promise<void> {
@@ -86,14 +117,22 @@ export class UsersComponent implements OnInit {
 
     if (addressId == 0) {
       this.address = new Address()
-      this.address.userId = this.user?.id
+      this.address.userId = this.model?.id
     }
     else {
-      this.address = this.user?.addresses?.find(address => {
+      this.address = this.model?.addresses?.find(address => {
         return address.id == addressId
       })
     }
     this.addressModal?.show()
+  }
+
+  public async removeAddress(id: number = 0): Promise<void> {
+    this.addServices.deleteAddress(id)
+      .then(res => {
+        this.model!.addresses = this.model?.addresses?.filter(add => add.id !== id)
+        alert("Indirizzo rimosso con successo")
+      })
   }
 
 }
