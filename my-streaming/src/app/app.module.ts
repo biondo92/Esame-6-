@@ -18,6 +18,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
+import { FilmsComponent } from './components/films/films.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { UsersComponent } from './components/users/users.component';
     RolesComponent,
     CitiesComponent,
     SettingsComponent,
-    UsersComponent
+    UsersComponent,
+    FilmsComponent
   ],
   imports: [
     BrowserModule,

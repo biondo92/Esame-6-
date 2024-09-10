@@ -1,0 +1,131 @@
+<div class="card card-primary card-outline shadow-lg mb-4">
+    <div class="card-header">
+        <div class="card-title">Gestione Film</div>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col pt-3">
+                <button class="btn btn-primary mb-3" (click)="openModal('Add Film')">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <table *ngIf="this.films !== undefined" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titolo</th>
+                            <th>Categoria</th>
+                            <th>Valutazione</th>
+                            <th>Durata</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of this.films">
+                            <td width="5%">{{row.id}}</td>
+                            <td width="85%">{{row.title}}</td>
+                            <td width="85%">{{categoryName(row.categoryId)}}</td>
+                            <td width="85%">
+                                <i class="fas fa-star" *ngFor="let item of [].constructor(row.rating)"></i>
+                            </td>
+                            <td width="85%">{{row.duration}}</td>
+                            <td width="10%">
+                                <button class="btn btn-primary" (click)="openModal('Edit Film', row.id)">
+                                    <i class="fas fa-pencil"></i>
+                                </button>
+                                <button class="btn btn-danger ms-2" (click)="removeFilm(row.id)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<div id="modal-film" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{modalTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-film">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Titolo
+                                    </label>
+                                    <br>
+                                    <input type="text" class="form-control" [(ngModel)]="model!.title" name="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Categoria
+                                    </label>
+                                    <br>
+                                    <select class="form-select" [(ngModel)]="model!.categoryId" name="categoryId">
+                                        <option value="0">Seleziona Categoria</option>
+                                        <option *ngFor="let cat of this.categories" value="{{cat.id}}">
+                                            {{cat.description}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Durata
+                                    </label>
+                                    <br>
+                                    <input type="number" class="form-control" [(ngModel)]="model!.duration"
+                                        name="duration">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Valutazione
+                                    </label>
+                                    <br>
+                                    <select class="form-select" [(ngModel)]="model!.rating" name="rationg">
+                                        <option value="0">Seleziona Valutazione</option>
+                                        <option value="1">1 Stella</option>
+                                        <option value="2">2 Stelle</option>
+                                        <option value="3">3 Stelle</option>
+                                        <option value="4">4 Stelle</option>
+                                        <option value="5">5 Stelle</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-success" (click)="AddOrUpdate()">Salva</button>
+            </div>
+        </div>
+    </div>
+</div>

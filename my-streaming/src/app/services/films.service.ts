@@ -27,6 +27,28 @@ export class FilmsService {
     })
   }
 
+  public add(model: Film): Promise<Film> {
+    return new Promise((resolve, obj) => {
+      this.http.post(this._baseUrl + "/add", model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Film>).data!))
+    })
+  }
+
+  public update(model: Film): Promise<Film> {
+    return new Promise((resolve, obj) => {
+      this.http.put(this._baseUrl + "/" + model.id, model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Film>).data!))
+    })
+  }
+
 
   public getCategories(): Promise<Category[]> {
     return new Promise((resolve, obj) => {
@@ -52,6 +74,17 @@ export class FilmsService {
         .subscribe(res => resolve((res as ApiResponse<Category[]>).data!))
     })
 
+  }
+
+  public delete(id: number): Promise<boolean> {
+    return new Promise((resolve, obj) => {
+      this.http.delete(this._baseUrl + "/" + id, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve(true))
+    })
   }
 }
 
