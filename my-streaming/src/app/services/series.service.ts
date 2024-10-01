@@ -29,30 +29,37 @@ export class SeriesService {
     })
   }
 
-
-  public getCategories(): Promise<Category[]> {
+  public add(model: Serie): Promise<Serie> {
     return new Promise((resolve, obj) => {
-      let url = this._baseUrl.replace("series", "categories")
-      this.http.get(url, {
+      this.http.post(this._baseUrl + "/add", model, {
         headers: {
           "Authorization": "Bearer " + this.auth.getToken()
         }
       })
-        .subscribe(res => resolve((res as ApiResponse<Category[]>).data!))
+        .subscribe(res => resolve((res as ApiResponse<Serie>).data!))
     })
-
   }
 
-  public getCategory(id: number): Promise<Category[]> {
+  public update(model: Serie): Promise<Serie> {
     return new Promise((resolve, obj) => {
-      let url = this._baseUrl.replace("series", "categories")
-      this.http.get(url + "/" + id, {
+      this.http.put(this._baseUrl + "/" + model.id, model, {
         headers: {
           "Authorization": "Bearer " + this.auth.getToken()
         }
       })
-        .subscribe(res => resolve((res as ApiResponse<Category[]>).data!))
+        .subscribe(res => resolve((res as ApiResponse<Serie>).data!))
     })
-
   }
+  public delete(id: number): Promise<boolean> {
+    return new Promise((resolve, obj) => {
+      this.http.delete(this._baseUrl + "/" + id, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve(true))
+    })
+  }
+
+
 }

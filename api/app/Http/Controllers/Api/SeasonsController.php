@@ -26,7 +26,7 @@ class SeasonsController extends Controller
 
         // admin
         if (Gate::allows("is_in_role", 1)) {
-            $season = Season::with(['serie', 'episodes'])->get();
+            $season = Season::with(['serie', 'episodes', 'seasons.episodes'])->get();
             return response()->json([
                 'status' => 'Ok',
                 "data" => $season

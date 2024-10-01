@@ -50,31 +50,7 @@ export class FilmsService {
   }
 
 
-  public getCategories(): Promise<Category[]> {
-    return new Promise((resolve, obj) => {
-      let url = this._baseUrl.replace("films", "categories")
-      this.http.get(url, {
-        headers: {
-          "Authorization": "Bearer " + this.auth.getToken()
-        }
-      })
-        .subscribe(res => resolve((res as ApiResponse<Category[]>).data!))
-    })
 
-  }
-
-  public getCategory(id: number): Promise<Category[]> {
-    return new Promise((resolve, obj) => {
-      let url = this._baseUrl.replace("films", "categories")
-      this.http.get(url + "/" + id, {
-        headers: {
-          "Authorization": "Bearer " + this.auth.getToken()
-        }
-      })
-        .subscribe(res => resolve((res as ApiResponse<Category[]>).data!))
-    })
-
-  }
 
   public delete(id: number): Promise<boolean> {
     return new Promise((resolve, obj) => {

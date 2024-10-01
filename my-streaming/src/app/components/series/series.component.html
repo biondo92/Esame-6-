@@ -1,38 +1,43 @@
 <div class="card card-primary card-outline shadow-lg mb-4">
     <div class="card-header">
-        <div class="card-title">Gestione Film</div>
+        <div class="card-title">Gestione Serie Tv</div>
     </div>
     <div class="card-body">
         <div class="row mb-3">
             <div class="col pt-3">
-                <button class="btn btn-primary mb-3" (click)="openModal('Add Film')">
+                <button class="btn btn-primary mb-3" (click)="openModal('Add Serie')">
                     <i class="fas fa-plus"></i>
                 </button>
-                <table *ngIf="this.films !== undefined" class="table table-striped">
+                <table *ngIf="this.series !== undefined" class="table table-striped">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Id</th>
                             <th>Titolo</th>
                             <th>Categoria</th>
-                            <th>Valutazione</th>
-                            <th>Durata</th>
+                            <th>Stagioni</th>
+
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let row of this.films">
-                            <td width="5%">{{row.id}}</td>
-                            <td width="40%">{{row.title}}</td>
-                            <td width="20%">{{categoryName(row.categoryId)}}</td>
-                            <td width="15%">
-                                <i class="fas fa-star" *ngFor="let item of [].constructor(row.rating)"></i>
+                        <tr *ngFor="let row of this.series">
+                            <td width="5%">
+                                <i *ngIf="row.seasons !== undefined && row.seasons.length > 0" class="fas fa-plus"></i>
                             </td>
-                            <td width="10%">{{row.duration}}</td>
+                            <td width="5%">{{row.id}}</td>
+                            <td width="50%">{{row.title}}</td>
+                            <td width="15%">{{categoryName(row.categoryId)}}</td>
+                            <td width="15%">{{row.seasons?.length}}</td>
+                            <!-- <td width="15%">
+                                <i class="fas fa-star" *ngFor="let item of [].constructor(row.rating)"></i>
+                            </td> -->
+
                             <td width="10%">
-                                <button class="btn btn-primary" (click)="openModal('Edit Film', row.id)">
+                                <button class="btn btn-primary" (click)="openModal('Edit Serie', row.id)">
                                     <i class="fas fa-pencil"></i>
                                 </button>
-                                <button class="btn btn-danger ms-2" (click)="removeFilm(row.id)">
+                                <button class="btn btn-danger ms-2" (click)="removeSerie(row.id)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -49,7 +54,7 @@
     </div>
 </div>
 
-<div id="modal-film" class="modal" tabindex="-1">
+<div id="modal-serie" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -57,7 +62,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="form-film">
+                <form id="form-serie">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
@@ -86,21 +91,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="control-label">
-                                        Durata
-                                    </label>
-                                    <br>
-                                    <input type="number" class="form-control" [(ngModel)]="model!.duration"
-                                        name="duration">
-                                </div>
 
-                            </div>
-
-                        </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="control-label">
@@ -118,7 +110,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>

@@ -19,6 +19,7 @@ import { CitiesComponent } from './components/cities/cities.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { FilmsComponent } from './components/films/films.component';
+import { SeriesComponent } from './components/series/series.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { FilmsComponent } from './components/films/films.component';
     CitiesComponent,
     SettingsComponent,
     UsersComponent,
-    FilmsComponent
+    FilmsComponent,
+    SeriesComponent
   ],
   imports: [
     BrowserModule,
