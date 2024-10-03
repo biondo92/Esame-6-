@@ -21,27 +21,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let row of this.series">
-                            <td width="5%">
-                                <i *ngIf="row.seasons !== undefined && row.seasons.length > 0" class="fas fa-plus"></i>
-                            </td>
-                            <td width="5%">{{row.id}}</td>
-                            <td width="50%">{{row.title}}</td>
-                            <td width="15%">{{categoryName(row.categoryId)}}</td>
-                            <td width="15%">{{row.seasons?.length}}</td>
-                            <!-- <td width="15%">
-                                <i class="fas fa-star" *ngFor="let item of [].constructor(row.rating)"></i>
-                            </td> -->
+                        <ng-template ngFor let-row [ngForOf]="this.series">
+                            <tr>
+                                <td width="5%">
+                                    <a data-bs-toggle="collapse" href="#collapse-serie-{{row.id}}" role="button"
+                                        aria-expanded="false">
+                                        <i *ngIf="row.seasons !== undefined && row.seasons.length > 0"
+                                            class="fas fa-plus"></i>
+                                    </a>
 
-                            <td width="10%">
-                                <button class="btn btn-primary" (click)="openModal('Edit Serie', row.id)">
-                                    <i class="fas fa-pencil"></i>
-                                </button>
-                                <button class="btn btn-danger ms-2" (click)="removeSerie(row.id)">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+
+                                </td>
+                                <td width="5%">{{row.id}}</td>
+                                <td width="50%">{{row.title}}</td>
+                                <td width="15%">{{categoryName(row.categoryId)}}</td>
+                                <td width="15%">{{row.seasons?.length}}</td>
+                                <!-- <td width="15%">
+                                                        <i class="fas fa-star" *ngFor="let item of [].constructor(row.rating)"></i>
+                                                    </td> -->
+
+                                <td width="10%">
+                                    <button class="btn btn-primary" (click)="openModal('Edit Serie', row.id)">
+                                        <i class="fas fa-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-danger ms-2" (click)="removeSerie(row.id)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr id="collapse-serie-{{row.id}}" class="collapse">
+                                <td colspan="6">
+                                    <app-seasons [serieId]="row.id" [seasons]="row.seasons"></app-seasons>
+                                </td>
+                            </tr>
+                        </ng-template>
                     </tbody>
                 </table>
             </div>

@@ -51,6 +51,38 @@ export class SeasonsService {
 
   }
 
+  public add(model: Season): Promise<Season> {
+    return new Promise((resolve, obj) => {
+      this.http.post(this._baseUrl + "/add", model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Season>).data!))
+    })
+  }
+
+  public update(model: Season): Promise<Season> {
+    return new Promise((resolve, obj) => {
+      this.http.put(this._baseUrl + "/" + model.id, model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Serie>).data!))
+    })
+  }
+  public delete(id: number): Promise<boolean> {
+    return new Promise((resolve, obj) => {
+      this.http.delete(this._baseUrl + "/" + id, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve(true))
+    })
+  }
+
 
 
 }

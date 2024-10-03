@@ -20,6 +20,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { FilmsComponent } from './components/films/films.component';
 import { SeriesComponent } from './components/series/series.component';
+import { SeasonsComponent } from './components/seasons/seasons.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { SeriesComponent } from './components/series/series.component';
     SettingsComponent,
     UsersComponent,
     FilmsComponent,
-    SeriesComponent
+    SeriesComponent,
+    SeasonsComponent
   ],
   imports: [
     BrowserModule,
