@@ -21,6 +21,7 @@ import { UsersComponent } from './components/users/users.component';
 import { FilmsComponent } from './components/films/films.component';
 import { SeriesComponent } from './components/series/series.component';
 import { SeasonsComponent } from './components/seasons/seasons.component';
+import { EpisodesComponent } from './components/episodes/episodes.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { SeasonsComponent } from './components/seasons/seasons.component';
     UsersComponent,
     FilmsComponent,
     SeriesComponent,
-    SeasonsComponent
+    SeasonsComponent,
+    EpisodesComponent
   ],
   imports: [
     BrowserModule,

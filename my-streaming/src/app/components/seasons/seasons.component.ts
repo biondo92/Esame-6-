@@ -72,5 +72,16 @@ export class SeasonsComponent implements OnInit {
         })
     }
   }
+  public OnCollapse() {
+    var trigger = document.querySelector("#collapse-trigger-seasons")
+    for (var i = 0; i < trigger!.children.length; i++) {
+      if (trigger?.children[i].classList.contains("d-none")) {
+        trigger.children[i].classList.remove("d-none")
+      } else {
+        trigger?.children[i].classList.add("d-none")
+      }
+    }
+
+  }
 
 }

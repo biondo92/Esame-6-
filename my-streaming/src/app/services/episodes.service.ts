@@ -55,4 +55,36 @@ export class EpisodesService {
 
   }
 
+  public add(model: Episode): Promise<Episode> {
+    return new Promise((resolve, obj) => {
+      this.http.post(this._baseUrl + "/add", model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Episode>).data!))
+    })
+  }
+
+  public update(model: Episode): Promise<Episode> {
+    return new Promise((resolve, obj) => {
+      this.http.put(this._baseUrl + "/" + model.id, model, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve((res as ApiResponse<Episode>).data!))
+    })
+  }
+  public delete(id: number): Promise<boolean> {
+    return new Promise((resolve, obj) => {
+      this.http.delete(this._baseUrl + "/" + id, {
+        headers: {
+          "Authorization": "Bearer " + this.auth.getToken()
+        }
+      })
+        .subscribe(res => resolve(true))
+    })
+  }
+
 }

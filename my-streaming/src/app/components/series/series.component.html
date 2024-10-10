@@ -24,10 +24,13 @@
                         <ng-template ngFor let-row [ngForOf]="this.series">
                             <tr>
                                 <td width="5%">
-                                    <a data-bs-toggle="collapse" href="#collapse-serie-{{row.id}}" role="button"
+                                    <a id="collapse-trigger-series" data-bs-toggle="collapse"
+                                        href="#collapse-serie-{{row.id}}" role="button" (click)="OnCollapse()"
                                         aria-expanded="false">
                                         <i *ngIf="row.seasons !== undefined && row.seasons.length > 0"
                                             class="fas fa-plus"></i>
+                                        <i *ngIf="row.seasons !== undefined && row.seasons.length > 0"
+                                            class="fas fa-minus d-none"></i>
                                     </a>
 
 

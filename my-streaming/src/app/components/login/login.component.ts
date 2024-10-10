@@ -18,15 +18,20 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router
   ) {
-    
+
   }
 
   ngOnInit(): void {
 
   }
 
-  async onSubmit(): Promise<void>{
+  async onSubmit(): Promise<void> {
+    var con = document.querySelector("#form-container")
+    var mex = document.querySelector("#mex")
+    mex!.innerHTML = "accesso in corso....."
+    con!.innerHTML = "<i class='fas fa-sync fa-spin fa-3x m-auto' />"
+    con!.classList.add("d-flex")
     this.auth.login(this.username, this.password)
-    .then(() => this.router.navigate(["/"]))
+      .then(() => this.router.navigate(["/"]))
   }
 }

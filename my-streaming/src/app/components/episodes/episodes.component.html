@@ -3,62 +3,45 @@
         <div class="col">
             <div class="card card-primary card-outline shadow-lg mb-4">
                 <div class="card-header">
-                    <div class="card-title">Stagioni</div>
+                    <div class="card-title">Episodi</div>
                 </div>
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col pt-3">
-                            <button class="btn btn-primary mb-3" (click)="openModal('Add Season')">
+                            <button class="btn btn-primary mb-3" (click)="openModal('Add Episode')">
                                 <i class="fas fa-plus"></i>
                             </button>
-                            <table *ngIf="this.seasons !== undefined" class="table table-striped">
+                            <table *ngIf="this.episodes !== undefined" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th></th>
+
                                         <th>Id</th>
                                         <th>Titolo</th>
-                                        <th>Episodi</th>
+                                        <th>Durata</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ng-template ngFor let-row [ngForOf]="this.seasons">
+                                    <ng-template ngFor let-row [ngForOf]="this.episodes">
                                         <tr>
-                                            <td width="5%">
-                                                <a id="collapse-trigger-seasons" data-bs-toggle="collapse"
-                                                    href="#collapse-season-{{row.id}}" (click)="OnCollapse()"
-                                                    role="button" aria-expanded="false">
-                                                    <i *ngIf="row.episodes !== undefined && row.episodes.length > 0"
-                                                        class="fas fa-plus"></i>
-                                                    <i *ngIf="row.episodes !== undefined && row.episodes.length > 0"
-                                                        class="fas fa-minus d-none"></i>
-                                                </a>
 
-
-                                            </td>
                                             <td width="5%">{{row.id}}</td>
-                                            <td width="65%">{{row.title}}</td>
+                                            <td width="70%">{{row.title}}</td>
 
-                                            <td width="15%">{{row.episodes?.length ?? 0}}</td>
+                                            <td width="15%">{{row.duration}}</td>
                                             <!-- <td width="15%">
                                                                     <i class="fas fa-star" *ngFor="let item of [].constructor(row.rating)"></i>
                                                                 </td> -->
 
                                             <td width="10%">
                                                 <button class="btn btn-primary"
-                                                    (click)="openModal('Edit Season', row.id)">
+                                                    (click)="openModal('Edit Episode', row.id)">
                                                     <i class="fas fa-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-danger ms-2" (click)="removeSeason(row.id)">
+                                                <button class="btn btn-danger ms-2" (click)="removeEpisode(row.id)">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                        <tr id="collapse-season-{{row.id}}" class="collapse">
-                                            <td colspan="5">
-                                                <app-episodes [seasonId]="row.id"
-                                                    [episodes]="row.episodes"></app-episodes>
                                             </td>
                                         </tr>
                                     </ng-template>
@@ -74,7 +57,7 @@
                 </div>
             </div>
 
-            <div id="modal-season" class="modal" tabindex="-1">
+            <div id="modal-episode" class="modal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -82,7 +65,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="form-season">
+                            <form id="form-episode">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12">
@@ -97,26 +80,21 @@
                                         </div>
                                     </div>
 
-
-                                    <!-- <div class="row">
+                                    <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label class="control-label">
-                                                    Valutazione
+                                                    Durata
                                                 </label>
                                                 <br>
-                                                <select class="form-select" [(ngModel)]="model!.rating" name="rationg">
-                                                    <option value="0">Seleziona Valutazione</option>
-                                                    <option value="1">1 Stella</option>
-                                                    <option value="2">2 Stelle</option>
-                                                    <option value="3">3 Stelle</option>
-                                                    <option value="4">4 Stelle</option>
-                                                    <option value="5">5 Stelle</option>
-            
-                                                </select>
+                                                <input type="number" class="form-control" [(ngModel)]="model!.duration"
+                                                    name="duration">
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
+
+
+
                                 </div>
                             </form>
                         </div>
