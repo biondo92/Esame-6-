@@ -10,19 +10,23 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AppHeaderComponent {
 
-  public user!:User
-  public isAuthenticated(): boolean { 
-    return this.auth.isAuthenticated() 
+  public user!: User
+  public isAuthenticated(): boolean {
+    return this.auth.isAuthenticated()
   };
 
-  public logout(): void{
+  public logout(): void {
     this.auth.logout()
+  }
+
+  public Navigate(url: string): void {
+    window.location.href = url
   }
 
   /**
    *
    */
-  constructor(private auth: AuthService,protected router:Router) { 
+  constructor(private auth: AuthService, protected router: Router) {
     this.user = this.auth.getUser()
   }
 }

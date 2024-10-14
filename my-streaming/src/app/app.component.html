@@ -2,10 +2,10 @@
 
   <app-header></app-header>
 
-  <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+  <aside *ngIf="this.isAuthenticated()" class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <app-sidebar-brand></app-sidebar-brand>
 
-    <div *ngIf="true" class="sidebar-wrapper">
+    <div class="sidebar-wrapper">
       <app-sidebar></app-sidebar>
     </div>
   </aside>
@@ -26,10 +26,13 @@
   </main>
   <!--end::App Main-->
 
-  <app-footer></app-footer>
+  <app-footer *ngIf="this.isAuthenticated()"></app-footer>
 
 </div>
 
 <ng-template #login>
   <app-login></app-login>
+</ng-template>
+<ng-template #register>
+  <app-register></app-register>
 </ng-template>

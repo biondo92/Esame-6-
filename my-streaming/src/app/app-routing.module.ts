@@ -12,6 +12,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { FilmsComponent } from './components/films/films.component';
 import { SeriesComponent } from './components/series/series.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     path: 'login',
     title: "Login",
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    title: "Register",
+    component: RegisterComponent,
   },
   {
     path: 'profile',

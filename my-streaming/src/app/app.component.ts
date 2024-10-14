@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   };
   isAdmin: boolean = true
   public isRenderingLoginPage: boolean = false
+  public isRenderingRegisterPage: boolean = false
   /**
    *
    */
@@ -63,6 +64,12 @@ export class AppComponent implements OnInit {
         }
         else {
           this.isRenderingLoginPage = false
+        }
+        if (this.router.url === '/register') {
+          this.isRenderingRegisterPage = true
+        }
+        else {
+          this.isRenderingRegisterPage = false
         }
       });
   }
