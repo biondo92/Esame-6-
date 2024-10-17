@@ -42,6 +42,20 @@ export class AuthService {
     }
     return this.user!
   }
+  public async register(model: User, password: string): Promise<void> {
+    return new Promise((resolve, obj) => {
+      this.http.post(this._baseUrl + "/register", {
+        email: model.email,
+        password: password,
+        name: model.name,
+        lastName: model.lastName
+      }).subscribe(res => {
+        this.login(model.email!, password)
+        resolve()
+      })
+    })
+
+  }
 
   public getToken(): string {
     let json = localStorage.getItem("LoginStatus")

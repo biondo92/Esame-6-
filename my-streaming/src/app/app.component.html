@@ -1,4 +1,4 @@
-<div *ngIf="!this.isRenderingLoginPage else login" class="app-wrapper">
+<div *ngIf="!this.isRenderingLoginPage && !this.isRenderingRegisterPage else check" class="app-wrapper">
 
   <app-header></app-header>
 
@@ -30,9 +30,7 @@
 
 </div>
 
-<ng-template #login>
-  <app-login></app-login>
-</ng-template>
-<ng-template #register>
-  <app-register></app-register>
+<ng-template #check>
+  <app-login *ngIf="this.isRenderingLoginPage"></app-login>
+  <app-register *ngIf="this.isRenderingRegisterPage"></app-register>
 </ng-template>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -9,18 +11,30 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
+  protected model?: User = new User
+
+  protected Pass?: string = ""
+  protected confPass?: string = ""
 
   /**
    *
    */
   constructor(
     private auth: AuthService,
+    private userService: UserService,
     private router: Router
   ) {
 
   }
 
   ngOnInit(): void {
+
+  }
+
+  public async Register(): Promise<void> {
+    this.auth.register(this.model!, this.Pass!).then(res => {
+      alert("Registrazione effettuata con successo")
+    })
 
   }
 
