@@ -1,8 +1,9 @@
-<div *ngIf="!this.isRenderingLoginPage && !this.isRenderingRegisterPage else check" class="app-wrapper">
+<div *ngIf="!this.isRenderingLoginPage && !this.isRenderingRegisterPage else check"
+  class="app-wrapper {{this.getWrapperStyle()}}">
 
   <app-header></app-header>
 
-  <aside *ngIf="this.isAuthenticated()" class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+  <aside *ngIf="this.isInRole('Admin')" class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <app-sidebar-brand></app-sidebar-brand>
 
     <div class="sidebar-wrapper">

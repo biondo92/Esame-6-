@@ -33,6 +33,18 @@ export class AuthService {
     return this.user !== null && this.user !== undefined
   }
 
+
+  public isInRole(role: string): boolean {
+    let json = localStorage.getItem("LoginStatus")
+    if (json !== null && json !== undefined) {
+      let status = (JSON.parse(json) as LoginStatus)
+      this.token = status.token
+      this.user = status.user
+    }
+    return this.user !== null && this.user !== undefined && this.user.role?.description == role
+  }
+
+
   public getUser(): User {
     let json = localStorage.getItem("LoginStatus")
     if (json !== null && json !== undefined) {

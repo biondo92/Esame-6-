@@ -14,9 +14,13 @@ export class AppHeaderComponent {
   public isAuthenticated(): boolean {
     return this.auth.isAuthenticated()
   };
+  public isInRole(role: string): boolean {
+    return this.auth.isInRole(role)
+  };
 
   public logout(): void {
     this.auth.logout()
+    this.Navigate('/')
   }
 
   public Navigate(url: string): void {

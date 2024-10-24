@@ -23,6 +23,7 @@ import { SeriesComponent } from './components/series/series.component';
 import { SeasonsComponent } from './components/seasons/seasons.component';
 import { EpisodesComponent } from './components/episodes/episodes.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { RegisterComponent } from './components/register/register.component';
     SeriesComponent,
     SeasonsComponent,
     EpisodesComponent,
-    RegisterComponent
+    RegisterComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,

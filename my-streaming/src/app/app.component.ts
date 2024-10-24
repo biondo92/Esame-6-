@@ -20,6 +20,17 @@ export class AppComponent implements OnInit {
   public isAuthenticated(): boolean {
     return this.auth.isAuthenticated()
   };
+  public isInRole(role: string): boolean {
+    return this.auth.isInRole(role)
+  };
+  public getWrapperStyle() {
+    var result = ""
+    if (!this.isInRole('Admin')) {
+      result = 'd-flex flex-column'
+    }
+    return result
+  }
+
   isAdmin: boolean = true
   public isRenderingLoginPage: boolean = false
   public isRenderingRegisterPage: boolean = false
@@ -37,10 +48,6 @@ export class AppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     // this.auth.login("admin@gmail.com", "password")
     // this.data = await this.categories.getList()
-
-    console.log({
-      isAuthenticated: this.auth.isAuthenticated(),
-    })
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))

@@ -13,6 +13,7 @@ import { UsersComponent } from './components/users/users.component';
 import { FilmsComponent } from './components/films/films.component';
 import { SeriesComponent } from './components/series/series.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,12 @@ const routes: Routes = [
     path: 'register',
     title: "Register",
     component: RegisterComponent,
+  },
+  {
+    path: 'catalog',
+    title: "Catalog",
+    component: CatalogComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
