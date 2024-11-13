@@ -122,6 +122,7 @@ return new class extends Migration
             $table->id("id");
             $table->unsignedBigInteger('categoryId');
             $table->string('title');
+            $table->text('image');
             $table->unsignedInteger('duration');
             $table->unsignedInteger('rating');
             $table->timestamps();
@@ -134,6 +135,7 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('categoryId');
             $table->string('title');
+            $table->text('image');
             $table->unsignedInteger('rating');
             $table->timestamps();
             $table->softDeletes();

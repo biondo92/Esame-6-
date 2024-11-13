@@ -88,4 +88,12 @@ export class SeriesComponent implements OnInit {
 
   }
 
+  handleUpload(event:any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        this.model!.image = reader.result?.toString()
+    };
+}
 }

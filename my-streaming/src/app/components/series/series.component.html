@@ -27,9 +27,9 @@
                                     <a id="collapse-trigger-series" data-bs-toggle="collapse"
                                         href="#collapse-serie-{{row.id}}" role="button" (click)="OnCollapse()"
                                         aria-expanded="false">
-                                        <i *ngIf="row.seasons !== undefined && row.seasons.length > 0"
+                                        <i *ngIf="row.seasons !== undefined"
                                             class="fas fa-plus"></i>
-                                        <i *ngIf="row.seasons !== undefined && row.seasons.length > 0"
+                                        <i *ngIf="row.seasons !== undefined "
                                             class="fas fa-minus d-none"></i>
                                     </a>
 
@@ -61,10 +61,6 @@
                     </tbody>
                 </table>
             </div>
-
-
-
-
         </div>
 
     </div>
@@ -108,14 +104,14 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="control-label">
                                         Valutazione
                                     </label>
                                     <br>
-                                    <select class="form-select" [(ngModel)]="model!.rating" name="rationg">
+                                    <select class="form-select" [(ngModel)]="model!.rating" name="rating">
                                         <option value="0">Seleziona Valutazione</option>
                                         <option value="1">1 Stella</option>
                                         <option value="2">2 Stelle</option>
@@ -126,7 +122,20 @@
                                     </select>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Immagine
+                                    </label>
+                                    <br>
+                                    <img class="img-fluid" src="{{model!.image}}" />
+                                    <br>
+                                    <input type="file" class="form-control-file" (change)="handleUpload($event)" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

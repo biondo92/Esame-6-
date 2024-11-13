@@ -18,6 +18,7 @@ class Film extends Model
         'title',
         'duration',
         'rating',
+        'image'
     ];
 
     public function category()

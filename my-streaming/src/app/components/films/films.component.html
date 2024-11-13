@@ -119,6 +119,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Immagine
+                                    </label>
+                                    <br>
+                                    <img class="img-fluid" src="{{model!.image}}" />
+                                    <br>
+                                    <input type="file" class="form-control-file"(change)="handleUpload($event)" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

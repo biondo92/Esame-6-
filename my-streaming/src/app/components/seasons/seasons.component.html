@@ -29,9 +29,9 @@
                                                 <a id="collapse-trigger-seasons" data-bs-toggle="collapse"
                                                     href="#collapse-season-{{row.id}}" (click)="OnCollapse()"
                                                     role="button" aria-expanded="false">
-                                                    <i *ngIf="row.episodes !== undefined && row.episodes.length > 0"
+                                                    <i *ngIf="row.episodes !== undefined"
                                                         class="fas fa-plus"></i>
-                                                    <i *ngIf="row.episodes !== undefined && row.episodes.length > 0"
+                                                    <i *ngIf="row.episodes !== undefined "
                                                         class="fas fa-minus d-none"></i>
                                                 </a>
 
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div id="modal-season" class="modal" tabindex="-1">
+            <div id="modal-season-{{this.serieId}}-{{this.model?.id}}" class="modal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

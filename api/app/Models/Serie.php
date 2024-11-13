@@ -17,6 +17,7 @@ class Serie extends Model
         'categoryId',
         'title',
         'rating',
+        'image'
     ];
 
     public function category()

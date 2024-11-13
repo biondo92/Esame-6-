@@ -28,7 +28,6 @@ export class FilmsComponent implements OnInit {
     this.categories = await this.catService.getList()
     this.modal = Modal.getOrCreateInstance('#modal-film')
     this.films = await this.filmsService.getList()
-
   }
 
   public openModal(modalTitle: string, Id: number = 0): void {
@@ -79,4 +78,12 @@ export class FilmsComponent implements OnInit {
     }
   }
 
+  handleUpload(event:any) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+          this.model!.image = reader.result?.toString()
+      };
+  }
 }

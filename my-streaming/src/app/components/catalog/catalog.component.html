@@ -1,9 +1,45 @@
-<div *ngFor="let cat of this.catalog" class="w-100">
-    <h2>{{cat.category.description}}</h2>
-    <div class="row">
-        <div *ngFor="let film of cat.films" class="col-2">
-            <h4>{{film.title}}</h4>
-        </div>
+<ul class="nav nav-tabs" id="myNav" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="film-tab" data-bs-toggle="tab" data-bs-target="#film" type="button" role="tab" aria-controls="film" aria-selected="true">Film</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="serie-tab" data-bs-toggle="tab" data-bs-target="#serie" type="button" role="tab" aria-controls="serie" aria-selected="false">Serie</button>
+    </li>
 
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="film" role="tabpanel" aria-labelledby="film-tab">
+        <div *ngFor="let cat of this.catalog" class="w-100">
+            <h2 *ngIf="cat.films.length>0" class="d-inline">{{cat.category.description}} <small>({{cat.films.length}})</small></h2>
+            <div *ngIf="cat.films.length>0" class="row flex-nowrap overflow-scroll pt-3 pb-3">
+        
+                <div *ngFor="let film of cat.films" class="col-2 border border-primary p-3 m-1">
+                    <h4>{{film.title}}</h4>
+                    <p><strong>durata: </strong>{{film.duration}} minuti</p>
+                    <p><strong>valutazione: </strong> <i class="fas fa-star" *ngFor="let item of [].constructor(film.rating)"></i></p>
+                    <img src="{{film.image}}" alt="{{film.title}}_image" class="img-fluid">
+                </div>
+        
+            </div>
+        </div>
     </div>
-</div>
+    <div class="tab-pane fade" id="serie" role="tabpanel" aria-labelledby="serie-tab">
+        <div *ngFor="let cat of this.catalog" class="w-100">
+            <h2 *ngIf="cat.series.length>0" class="d-inline">{{cat.category.description}} <small>({{cat.series.length}})</small></h2>
+            <div *ngIf="cat.series.length>0" class="row flex-nowrap overflow-scroll pt-3 pb-3">
+        
+                <div *ngFor="let serie of cat.series" class="col-2 border border-primary p-3 m-1">
+                    <h4>{{serie.title}}</h4>
+                    <p><strong>stagioni: </strong>{{serie.seasons?.length}} stagioni</p>
+                    <!-- <p><strong>episodi: </strong>{{serie.seasons?.length}} stagioni</p> -->
+                     <p><strong>valutazione: </strong> <i class="fas fa-star" *ngFor="let item of [].constructor(serie.rating)"></i></p> 
+                    <img src="{{serie.image}}" alt="{{serie.title}}_image" class="img-fluid">
+                </div>
+        
+            </div>
+        </div>
+    </div>
+    
+  </div>
+  
+

@@ -5,6 +5,7 @@ export class Serie {
   public categoryId?: number
   public title?: string
   public rating?: number
+  public image?: string
   public seasons?: Season[]
 
   constructor() { }
