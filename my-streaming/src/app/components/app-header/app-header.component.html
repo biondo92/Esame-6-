@@ -11,6 +11,9 @@
           class="brand-image opacity-75 shadow">
         <!--end::Brand Image-->
       </li>
+      <li *ngIf="this.isAuthenticated()" class="nav-item d-flex align-items-center justify-content-center">
+        <a href="/catalog" class="nav-link fs-5">Catalogo</a>
+      </li>
     </ul>
     <!--end::Start Navbar Links-->
 

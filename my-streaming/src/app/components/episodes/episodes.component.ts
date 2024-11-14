@@ -25,8 +25,8 @@ export class EpisodesComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
-
-    this.modal = Modal.getOrCreateInstance('#modal-episode')
+    var selector = '#collapse-season-' + this.seasonId + ' #modal-episode'
+    this.modal = Modal.getOrCreateInstance(selector)
   }
 
   public openModal(modalTitle: string, Id: number = 0): void {

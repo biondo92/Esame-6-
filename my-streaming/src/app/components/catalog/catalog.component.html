@@ -13,7 +13,7 @@
             <h2 *ngIf="cat.films.length>0" class="d-inline">{{cat.category.description}} <small>({{cat.films.length}})</small></h2>
             <div *ngIf="cat.films.length>0" class="row flex-nowrap overflow-scroll pt-3 pb-3">
         
-                <div *ngFor="let film of cat.films" class="col-2 border border-primary p-3 m-1">
+                <div *ngFor="let film of cat.films" class="col-lg-2 col-md-6 col-12 border border-primary p-3 m-1 video-box">
                     <h4>{{film.title}}</h4>
                     <p><strong>durata: </strong>{{film.duration}} minuti</p>
                     <p><strong>valutazione: </strong> <i class="fas fa-star" *ngFor="let item of [].constructor(film.rating)"></i></p>
@@ -28,7 +28,7 @@
             <h2 *ngIf="cat.series.length>0" class="d-inline">{{cat.category.description}} <small>({{cat.series.length}})</small></h2>
             <div *ngIf="cat.series.length>0" class="row flex-nowrap overflow-scroll pt-3 pb-3">
         
-                <div *ngFor="let serie of cat.series" class="col-2 border border-primary p-3 m-1">
+                <div *ngFor="let serie of cat.series" class="col-lg-2 col-md-6 col-12 border border-primary p-3 m-1  video-box">
                     <h4>{{serie.title}}</h4>
                     <p><strong>stagioni: </strong>{{serie.seasons?.length}} stagioni</p>
                     <!-- <p><strong>episodi: </strong>{{serie.seasons?.length}} stagioni</p> -->
