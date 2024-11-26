@@ -18,6 +18,9 @@
                     <p><strong>durata: </strong>{{film.duration}} minuti</p>
                     <p><strong>valutazione: </strong> <i class="fas fa-star" *ngFor="let item of [].constructor(film.rating)"></i></p>
                     <img src="{{film.image}}" alt="{{film.title}}_image" class="img-fluid">
+                    <div class="play-btn w-100 h-100 align-items-center justify-content-center">
+                        <i class="fas fa-play-circle fa-3x"></i>
+                    </div>
                 </div>
         
             </div>

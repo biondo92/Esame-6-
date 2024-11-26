@@ -1,3 +1,24 @@
 <div class="background">
-    <!-- <img src="assets/img/landing.png" /> -->
+    <div class="wrapper w-100 h-100 d-flex flex-row justify-content-center">
+        <div class="align-items-center justify-content-center">
+            <h1 class="ff-audiowide text-light mt-3" style="font-size: 108px;">MyStreaming</h1>
+            <p class="text-light fs-2 text-center">
+                Migliaia di Film & serie TV
+                <span *ngIf="!this.isAuthenticated">
+                    <br />
+                    <br />
+                    <br />
+                    <a class="text-light" href="/login">Accedi</a> o <a class="text-light"href="/register">Registrati</a>
+                    <br />
+                    per visualizzare il catalogo!
+                </span>
+                <span *ngIf="this.isAuthenticated">
+                    <br />
+                    <br />
+                    <br />
+                    Vai al <a class="text-light" href="/catalog">Catalogo</a>
+                </span>
+            </p>
+        </div>
+    </div>
 </div>
