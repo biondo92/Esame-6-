@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -15,11 +17,13 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth:api', [
             'except' => [
-                'login', 
-                'register'
+                'login',
+                'register',
+                'getSalt'
             ]
         ]);
     }
@@ -29,23 +33,59 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+    public function getSalt()
+    {
+        $user = User::where('email', request('email'))->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'KO',
+                "data" => "si è verificato un errore"   //se l'utente non esiste non rivelare che l'utente non esiste
+            ]);
+
+        }
+
+        $salt = $user->salt;
+        return response()->json([
+            'status' => 'Ok',
+            "data" => $salt
+        ]);
+    }
+
     public function login()
     {
-        $credentials = request(['email', 'password']);
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['statusText' => 'Unauthorized'], 401);
+        $user = User::where('email', request('email'))->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'KO',
+                "data" => "si è verificato un errore"   //se l'utente non esiste non rivelare che l'utente non esiste
+            ]);
         }
-        return $this->respondWithToken($token);
+
+        if (request('password') == $user->password) {
+            $token = JWTAuth::fromUser($user);
+            return $this->respondWithToken($token);
+        }
     }
 
     public function register()
     {
-        $user = new User(request()->all());
-        $user->save();
+        $salt = bin2hex(random_bytes(16));
+        $hashedPassword = hash('sha256', request('password') . $salt);
+
+        $user = User::create([
+            'email' => request('email'),
+            'password' => $hashedPassword,
+            'salt' => $salt, // Salva il salt generato
+            'name' =>  request('name'),
+            'lastName' =>  request('lastName'),
+        ]);
+
         $user->refresh();
-        // return response()->json($user->toArray());
+
         return response()->json([
-            'status' => 'Ok', 
+            'status' => 'Ok',
             "data" => $user->toArray()
         ]);
     }
@@ -59,10 +99,10 @@ class AuthController extends Controller
     {
         // return response()->json(auth()->user());
         $u = auth()->user();
-        $user = User::with(['role'])->find($u->getAuthIdentifier()); 
+        $user = User::with(['role'])->find($u->getAuthIdentifier());
         return response()->json([
-            'status' => 'Ok', 
-            "data" =>  $user//auth()->user()
+            'status' => 'Ok',
+            "data" => $user//auth()->user()
         ]);
     }
 
@@ -76,7 +116,7 @@ class AuthController extends Controller
         auth()->logout();
 
         return response()->json([
-            'status' => 'Ok', 
+            'status' => 'Ok',
             "data" => null
         ]);
     }
@@ -89,22 +129,6 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
-    }
-
-    public function testRuoli()
-    {
-        $mex="";
-        if(Gate::allows("is_in_role",1)){
-          $mex="Admin";
-        }
-        elseif(Gate::allows("is_in_role",2)){
-            $mex="Utente";
-        }
-        else{
-            $mex="Ospite";
-        }
-
-        return response()->json($mex);
     }
 
     /**

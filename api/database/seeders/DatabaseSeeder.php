@@ -32,7 +32,9 @@ class DatabaseSeeder extends Seeder
 
         DB::insert("INSERT INTO categories (description) VALUES ('Action'),('Fantasy');");
 
-
+        $adminSalt =  bin2hex(random_bytes(16));
+        $userSalt =  bin2hex(random_bytes(16));
+        $guestSalt = bin2hex(random_bytes(16));
 
         User::factory()->create([
             "roleId" => 1,
@@ -40,7 +42,8 @@ class DatabaseSeeder extends Seeder
             "lastName" => "test user",
             "email" => "admin@gmail.com",
             "credits" => 0,
-
+            'salt' => $adminSalt,
+            'password' => hash('sha256', 'password' . $adminSalt),
         ]);
 
         User::factory()->create([
@@ -49,7 +52,8 @@ class DatabaseSeeder extends Seeder
             "lastName" => "test user",
             "email" => "user@gmail.com",
             "credits" => 0,
-
+            'salt' => $userSalt,
+            'password' => hash('sha256', 'password' . $userSalt),
         ]);
 
         User::factory()->create([
@@ -58,7 +62,8 @@ class DatabaseSeeder extends Seeder
             "lastName" => "test user",
             "email" => "guest@gmail.com",
             "credits" => 0,
-
+            'salt' => $guestSalt,
+            'password' => hash('sha256', 'password' . $guestSalt),
         ]);
     }
 }

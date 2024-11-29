@@ -52,6 +52,7 @@ return new class extends Migration
             $table->string("lastName")->nullable();
             $table->string('email');
             $table->string('password');
+            $table->string("salt");
             $table->unsignedBigInteger("roleId")->default(2);
             $table->double("credits")->default(0);
             $table->timestamp('email_verified_at')->nullable();

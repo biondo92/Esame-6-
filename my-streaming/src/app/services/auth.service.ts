@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, Url
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { ApiResponse } from '../models/ApiResponse';
+import { sha256 } from 'js-sha256';
 
 @Injectable({
   providedIn: 'root'
@@ -81,27 +82,37 @@ export class AuthService {
 
   public async login(userName: string, password: string): Promise<void> {
     return new Promise((resolve, obj) => {
-      this.http.post(this._baseUrl + "/login", {
-        email: userName,
-        password: password
+      this.http.post(this._baseUrl + "/get-salt", {
+        email: userName
       })
         .subscribe(res => {
-          this.token = (res as any).access_token;
 
-          this.http.get(this._baseUrl + "/me", {
-            headers: {
-              "Authorization": "Bearer " + this.token
-            }
-          })
-            .subscribe(res => {
-              this.user = (res as ApiResponse<User>).data
-              this.user!.fullname = this.user?.name + " " + this.user?.lastName
+          var salt = (res as any).data;
+          var cripted = sha256(password + salt)
 
-              let status = new LoginStatus(this.token!, this.user!)
-              localStorage.setItem("LoginStatus", JSON.stringify(status))
+          this.http.post(this._baseUrl + "/login", {
+            email: userName,
+            password: cripted
+          }).subscribe(resp => {
 
-              resolve()
+            this.token = (resp as any).access_token;
+
+            this.http.get(this._baseUrl + "/me", {
+              headers: {
+                "Authorization": "Bearer " + this.token
+              }
             })
+              .subscribe(res => {
+                this.user = (res as ApiResponse<User>).data
+                this.user!.fullname = this.user?.name + " " + this.user?.lastName
+
+                let status = new LoginStatus(this.token!, this.user!)
+                localStorage.setItem("LoginStatus", JSON.stringify(status))
+
+                resolve()
+              })
+          })
+
         })
     })
   }
@@ -115,7 +126,6 @@ export class AuthService {
           }
         })
           .subscribe(res => {
-            console.log(res)
             this.user = undefined
             this.token = undefined
             resolve()
