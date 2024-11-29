@@ -5,8 +5,8 @@
     <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                    role="tab" aria-controls="profile" aria-selected="true">Profilo</button>
+                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                    type="button" role="tab" aria-controls="profile" aria-selected="true">Profilo</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="addresses-tab" data-bs-toggle="tab" data-bs-target="#addresses"
@@ -54,7 +54,8 @@
                                     Credits
                                 </label>
                                 <br>
-                                <input type="text" class="form-control" [(ngModel)]="user!.credits" name="credits">
+                                <input type="text" class="form-control" readonly [(ngModel)]="user!.credits"
+                                    name="credits">
                             </div>
                         </div>
 
