@@ -30,6 +30,7 @@ class AuthController extends Controller
 
     /**
      * Get a JWT via given credentials.
+     * Tenta di recuperare un utente data un email,se l utente esiste restituisce il salt
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -38,13 +39,14 @@ class AuthController extends Controller
         $user = User::where('email', request('email'))->first();
 
         if (!$user) {
+            //se l'utente non esiste non rivelare che l'utente non esiste
             return response()->json([
                 'status' => 'KO',
-                "data" => "si è verificato un errore"   //se l'utente non esiste non rivelare che l'utente non esiste
+                "data" => "si è verificato un errore"   
             ]);
 
         }
-
+// l utente è stato trovato restituisco il salt
         $salt = $user->salt;
         return response()->json([
             'status' => 'Ok',
@@ -71,7 +73,9 @@ class AuthController extends Controller
 
     public function register()
     {
+        //crea un salt randomico per l utente in fase di registrazione
         $salt = bin2hex(random_bytes(16));
+        //crea un hash, utilizzando l algoritmo sha256, della password con l aggiunta del salt alla fine
         $hashedPassword = hash('sha256', request('password') . $salt);
 
         $user = User::create([
@@ -97,7 +101,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        // return response()->json(auth()->user());
+       //restituisce le informazioni dell utente attualmente loggato
         $u = auth()->user();
         $user = User::with(['role'])->find($u->getAuthIdentifier());
         return response()->json([
@@ -128,6 +132,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
+        //aggiorna il toker tramite refreshToken
         return $this->respondWithToken(auth()->refresh());
     }
 
@@ -140,6 +145,7 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        // incapsula il toker JWT in un oggetto
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

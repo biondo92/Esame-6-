@@ -16,14 +16,17 @@ export class AuthService {
   private user?: User
 
   constructor(private http: HttpClient) {
+    //tenta di recuperare lo stato attuale del login
     let json = localStorage.getItem("LoginStatus")
     if (json !== null && json !== undefined) {
+      //se trova un login status lo deserializza in un oggetto e lo salva in memoria
       let status = (JSON.parse(json) as LoginStatus)
       this.token = status.token
       this.user = status.user
     }
   }
 
+  //restituisce un flag che indica se l utente è loggato
   public isAuthenticated(): boolean {
     let json = localStorage.getItem("LoginStatus")
     if (json !== null && json !== undefined) {
@@ -34,7 +37,7 @@ export class AuthService {
     return this.user !== null && this.user !== undefined
   }
 
-
+//restituisce un flag che indica se l utente corrente appartiene al ruolo specificato
   public isInRole(role: string): boolean {
     let json = localStorage.getItem("LoginStatus")
     if (json !== null && json !== undefined) {
@@ -45,7 +48,7 @@ export class AuthService {
     return this.user !== null && this.user !== undefined && this.user.role?.description == role
   }
 
-
+// restituisce l utente attualmente loggato se ce ne uno
   public getUser(): User {
     let json = localStorage.getItem("LoginStatus")
     if (json !== null && json !== undefined) {
@@ -55,6 +58,8 @@ export class AuthService {
     }
     return this.user!
   }
+
+  //consente la registrazione spontanea dell utente e , nel caso di successo effettua il login con l utente appena creato
   public async register(model: User, password: string): Promise<void> {
     return new Promise((resolve, obj) => {
       this.http.post(this._baseUrl + "/register", {
@@ -69,7 +74,7 @@ export class AuthService {
     })
 
   }
-
+  // restituisce il token dell utente loggato
   public getToken(): string {
     let json = localStorage.getItem("LoginStatus")
     if (json !== null && json !== undefined) {
@@ -80,6 +85,11 @@ export class AuthService {
     return this.token!
   }
 
+  //questa funzione effettua diverse chiamate durante il processo di autenticazione
+  //1- chiama la action /get-salt passando l email dell utente che sta tentando di accedere
+  //2- se l utente esiste viene restituito il salt della password, che verra utilizzato per criptare la password cosi da non trasmetterla in chiaro
+  //3- se il login va a buon fine recupera le info dell utente appena loggato ed infine salva lo stato del login nel local storage
+  
   public async login(userName: string, password: string): Promise<void> {
     return new Promise((resolve, obj) => {
       this.http.post(this._baseUrl + "/get-salt", {
@@ -117,6 +127,7 @@ export class AuthService {
     })
   }
 
+  //effettua il logout dell utente loggato e pulisce lo stato del login nel local storage
   public async logout(): Promise<void> {
     return new Promise((resolve, obj) => {
       try {
@@ -156,6 +167,7 @@ class LoginStatus {
   }
 }
 
+//un guard utilizzato per proteggere le pagine che richiedono autenticazione
 export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
 
   const isLogged = inject(AuthService).isAuthenticated();

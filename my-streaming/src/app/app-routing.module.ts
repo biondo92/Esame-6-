@@ -32,10 +32,10 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'catalog',
+    path: 'catalog',  //il path segment dove risiede la pagina
     title: "Catalog",
     component: CatalogComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard] //blocca l accesso a un utente non loggato
   },
   {
     path: 'profile',

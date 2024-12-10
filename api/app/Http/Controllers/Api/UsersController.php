@@ -17,6 +17,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
+        //middleware ultilizzato per il controllo dell autorizzazione
         $this->middleware('auth:api');
     }
     /**
@@ -24,6 +25,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+        //admin
+        //questo gate controlla se l utente ha il ruolo (i permessi) per eseguire determinate azioni
         if (Gate::allows("is_in_role", 1)) {
 
             $users = User::with(['role', 'addresses'])->get();
@@ -142,7 +145,7 @@ class UsersController extends Controller
             ]);
         }
 
-        // user
+        // user -- //anche se l utente ha il ruolo user e quindi non potrebbe modificare i dati degli utenti può comunque modificare i suoi dati.
         if (Gate::allows("is_in_role", 2) && Gate::allows("owner", $id)) {
 
             $use = User::find($id);

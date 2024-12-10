@@ -22,7 +22,7 @@ export class AppHeaderComponent {
     this.auth.logout()
     this.Navigate('/')
   }
-
+// ti permette di navigare verso un altra pagina
   public Navigate(url: string): void {
     window.location.href = url
   }

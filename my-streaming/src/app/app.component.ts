@@ -14,8 +14,8 @@ import { BreadcrumbItem } from './components/breadcrumb/breadcrumb.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'my-streaming';
-  public breadcrumbItems: BreadcrumbItem[] = []
+  title = 'my-streaming'; // title dell applicazione 
+  public breadcrumbItems: BreadcrumbItem[] = []  //contiene gli elementi che comporranno il breadCrumb mostrato poi  frontEnd
 
   public isAuthenticated(): boolean {
     return this.auth.isAuthenticated()
@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
   public isInRole(role: string): boolean {
     return this.auth.isInRole(role)
   };
+  
+  //dato che la visualizzazione per admin è diversa da quella dell utente questa funzione determina le classi Css da applicare in base al ruole dell utente loggato 
   public getWrapperStyle() {
     var result = ""
     if (!this.isInRole('Admin')) {
@@ -44,11 +46,11 @@ export class AppComponent implements OnInit {
     private categories: CategoriesService
   ) { }
 
-  data!: Category[]
+  
   async ngOnInit(): Promise<void> {
-    // this.auth.login("admin@gmail.com", "password")
-    // this.data = await this.categories.getList()
-
+   
+ 
+    //questo codice analizza il router e in base all URL vcostruisce il breadCrumb
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event) => {

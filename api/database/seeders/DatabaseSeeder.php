@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+       //carica le città da un CSV e le inserisce a DB
         $csv = storage_path("data/cities.csv");
         $file = fopen($csv, "r");
         while (($data = fgetcsv($file, 2000, ",")) !== false) {
@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
                 "name" => $data[0],
             ]);
         }
+        //crea i ruoli dell applicazione
 
         DB::insert("INSERT INTO roles (description) VALUES ('Admin'),('User'),('Guest');");
 

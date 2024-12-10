@@ -8,7 +8,8 @@
                 <h3 class="mb-0">{{ this.title }}</h3>
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-end">
+                <ol class="breadcrumb float-sm-end">  
+                    <!--cicla tutti gli item contenuti nella lista, per ognuno renderizza un Li che sarà l elemento del breadCrumb-->
                     <li *ngFor="let item of this.breadcrumbItems; last as isLast" class="breadcrumb-item {{ isLast ? 'active': '' }}">
                         <a *ngIf="!isLast else active" href="{{item.url}}">{{item.title}}</a>
                         <ng-template #active>

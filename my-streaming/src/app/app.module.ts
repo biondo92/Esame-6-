@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 
 
+// contiene la registrazione di tutti i componenti utilizzati dell applicazione
 @NgModule({
   declarations: [
     AppComponent,

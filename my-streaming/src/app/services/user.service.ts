@@ -16,6 +16,7 @@ export class UserService {
 
   constructor(private auth: AuthService, private http: HttpClient) { }
 
+  //questa funzione riceve in input un utente, chiama il relativo endpoint per l aggiornamento passando il token jwt nell header della richiesta
   public update(user: User): Promise<User> {
     return new Promise((resolve, obj) => {
       this.http.put(this._baseUrl + "/" + user.id, user, {
@@ -27,6 +28,7 @@ export class UserService {
     })
   }
 
+  //recupera la lista degli utenti passando il token jwt nell header della richiesta
   public getList(): Promise<User[]> {
     return new Promise((resolve, obj) => {
       this.http.get(this._baseUrl, {
@@ -38,7 +40,7 @@ export class UserService {
     })
 
   }
-
+// aggiunge l utente passato in input passando il token jwt nell header della richiesta
   public add(model: User): Promise<User> {
     return new Promise((resolve, obj) => {
       this.http.post(this._baseUrl + "/add", model, {
@@ -49,7 +51,7 @@ export class UserService {
         .subscribe(res => resolve((res as ApiResponse<User>).data!))
     })
   }
-
+// cancella.....
   public delete(id: number): Promise<boolean> {
     return new Promise((resolve, obj) => {
       this.http.delete(this._baseUrl + "/" + id, {
