@@ -118,6 +118,20 @@
                                     </div>
                                 </div>
 
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Ruolo
+                                        </label>
+                                        <br>
+                                        <select class="form-select" [(ngModel)]="model!.roleId" name="roleId">
+                                            <option value="0">Seleziona Ruolo</option>
+                                            <option *ngFor="let role of this.roles" value="{{role.id}}">
+                                                {{role.description}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
