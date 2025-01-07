@@ -25,7 +25,7 @@ export class FilmsComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
-    this.categories = await this.catService.getList()
+    this.categories = await this.catService.getList() //recupera le categorie che verranno utilizzate poi per mostrarle nella tabella film
     this.modal = Modal.getOrCreateInstance('#modal-film')
     this.films = await this.filmsService.getList()
   }
@@ -51,6 +51,8 @@ export class FilmsComponent implements OnInit {
         alert("Film rimosso con successo")
       })
   }
+
+  //questa funzione riceve in input l id di una categoria e restituisce la relativa descrizione
   public categoryName(id: number = 0): string {
     return this.categories?.find(c => {
       return c.id == id
@@ -78,6 +80,8 @@ export class FilmsComponent implements OnInit {
     }
   }
 
+
+  //questa funzione recupera un file caricato tramite form lo trasforma in formato base64 e lo imposta come campo image del modello
   handleUpload(event:any) {
       const file = event.target.files[0];
       const reader = new FileReader();

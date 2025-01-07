@@ -55,6 +55,7 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        <!--per ogni stagione (quindi per ogni tr) c è la necessità di renderizzare un secondo tr contenente la tabella degli episodi di quella stagione-->
                                         <tr id="collapse-season-{{row.id}}" class="collapse">
                                             <td colspan="5">
                                                 <app-episodes [seasonId]="row.id"

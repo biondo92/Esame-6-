@@ -20,11 +20,15 @@ export class CategoriesComponent implements OnInit {
     
   }
   async ngOnInit(): Promise<void> {
+    //recupera le categorie attualmente inserite
    this.categories= await this.catService.getList()
+   //crea o recupera un istanza del modal di boostrap, utilizzato come contenitore per il form
    this.modal = Modal.getOrCreateInstance('#modal-category')
   }
 
 
+  //riceve il modello da passare al form, ed utilizza le info relative al modello per determinare se si tratta un Add o Edit ed infine
+  //mostra il modal
   public openModal(modalTitle: string, categoryId: number = 0): void {
     this.modalTitle = modalTitle
 
@@ -39,6 +43,7 @@ export class CategoriesComponent implements OnInit {
     this.modal?.show()
   }
 
+  //riceve in input l'Id di una categoria ed esegue una chiamata per eliminare la categoria dal DB
   public async removeCategory(id: number = 0): Promise<void> {
     this.catService.delete(id)
     .then(res => {
@@ -47,6 +52,7 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
+  //questa funzione invia il modello al API (post o put) in base alla presenza o meno del campo Id
   public async AddOrUpdate(): Promise<void> {
     if(this.model?.id == 0 || this.model!.id == undefined){
       this.catService.add(this.model!)

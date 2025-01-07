@@ -9,6 +9,8 @@ import { RolesService } from 'src/app/services/roles.service';
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
 })
+
+
 export class RolesComponent implements OnInit {
 
   protected modalTitle?: string

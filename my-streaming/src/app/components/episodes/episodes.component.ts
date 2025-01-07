@@ -25,6 +25,8 @@ export class EpisodesComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
+    //c è bisogno di identificare univocamente un tr per poter poi manipolare tale elemento via javascript
+    //per farlo utilizziamo l id della stagione
     var selector = '#collapse-season-' + this.seasonId + ' #modal-episode'
     this.modal = Modal.getOrCreateInstance(selector)
   }

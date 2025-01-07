@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+
+//intercetta l evento submit del form, cambia la grafica inserendo un loader e chiama l API  di autenticazione 
+//infine fa il redirect dell utente loggato verso la pagina catalog
   async onSubmit(): Promise<void> {
     var con = document.querySelector("#form-container")
     var mex = document.querySelector("#mex")

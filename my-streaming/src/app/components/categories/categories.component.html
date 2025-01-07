@@ -17,6 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!--per ognuna delle categorie renderizza un Tr con le info della categoria-->
                         <tr *ngFor="let row of this.categories">
                             <td width="5%">{{row.id}}</td>
                             <td width="85%">{{row.description}}</td>

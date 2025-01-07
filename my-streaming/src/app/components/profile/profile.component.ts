@@ -33,12 +33,14 @@ export class ProfileComponent implements OnInit {
     this.modal = Modal.getOrCreateInstance('#modal-address')
   }
 
+  //questa funzione riceve in input l id di una città e restituisce la relativa descrizione
   public cityName(id: number = 0): string {
     return this.cities?.find(city => {
       return city.id == id
     })?.name ?? ""
   }
 
+  //questa chiamata permette di aggiornare il profilo dell utente loggato
   public async UpdateUserProfile(): Promise<void> {
     this.userService.update(this.user!).then(res => {
       if (res !== null && res !== undefined) {
@@ -49,6 +51,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  //questa funzione riceve in input il modello di un indirizzo ed apre un modal contenente il form
   public openAddressModal(modalTitle: string, addressId: number = 0): void {
     this.modalTitle = modalTitle
 

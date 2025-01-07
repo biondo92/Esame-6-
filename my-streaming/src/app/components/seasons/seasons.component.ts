@@ -25,6 +25,9 @@ export class SeasonsComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
+
+     //c è bisogno di identificare univocamente un tr per poter poi manipolare tale elemento via javascript
+    //per farlo utilizziamo l id della serie
     var selector = '#collapse-serie-' + this.serieId + ' #modal-season'
     this.modal = Modal.getOrCreateInstance(selector)
   }
@@ -72,6 +75,8 @@ export class SeasonsComponent implements OnInit {
         })
     }
   }
+
+  //questa funzione gestisce la navigazione fra le varie righe della tabella (stagioni)
   public OnCollapse() {
     var trigger = document.querySelector("#collapse-trigger-seasons")
     for (var i = 0; i < trigger!.children.length; i++) {

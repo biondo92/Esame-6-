@@ -10,6 +10,7 @@ import { filter } from 'rxjs';
 export class BreadcrumbComponent implements OnInit {
   title!: string;
   breadcrumbItems: BreadcrumbItem[] = [
+    //PER DEFAULT impostiamo la root dell app nel Breadcrumb
     {
       url: "/",
       title: "Home"
@@ -21,11 +22,12 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //al caricamento del componente recupera le informazioni sulla posizione corrente tramite il router ed utilizza tali info per creare il breadcrumb
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event) => {
         let path = this.router.url
-          .split("/")
+          .split("/")  // /film/13
 
         this.breadcrumbItems = [
           {
@@ -47,6 +49,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 }
 
+//classe modello per il breadcrumb item
 export class BreadcrumbItem {
   public url!: string
   public title!: string

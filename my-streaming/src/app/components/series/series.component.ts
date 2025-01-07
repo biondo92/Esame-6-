@@ -49,6 +49,8 @@ export class SeriesComponent implements OnInit {
         alert("Serie rimossa con successo")
       })
   }
+
+  //questa funzione riceve in input l id di una categoria e restituisce la relativa descrizione
   public categoryName(id: number = 0): string {
     return this.categories?.find(c => {
       return c.id == id
@@ -88,6 +90,7 @@ export class SeriesComponent implements OnInit {
 
   }
 
+   //questa funzione recupera un file caricato tramite form lo trasforma in formato base64 e lo imposta come campo image del modello
   handleUpload(event:any) {
     const file = event.target.files[0];
     const reader = new FileReader();
