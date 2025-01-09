@@ -25,11 +25,11 @@
 
 .video-box:hover {
     cursor: pointer;
-    
+
     .play-btn {
         display: flex;
 
-        i{
+        i {
             font-size: 10em;
         }
     }
@@ -38,7 +38,7 @@
 .ff-audiowide {
     font-family: "Audiowide", sans-serif;
     font-weight: 400;
-    font-style: normal; 
+    font-style: normal;
 }
 
 // mobile
@@ -53,4 +53,9 @@
     .video-box {
         width: 48% !important;
     }
+}
+
+.home-text {
+    background-color: #0007;
+    padding: 5px;
 }

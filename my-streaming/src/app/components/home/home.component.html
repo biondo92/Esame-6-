@@ -4,11 +4,12 @@
             <h1 class="ff-audiowide text-light mt-3" style="font-size: 108px;">MyStreaming</h1>
             <p class="text-light fs-2 text-center">
                 Migliaia di Film & serie TV
-                <span *ngIf="!this.isAuthenticated">
+                <span *ngIf="!this.isAuthenticated" class="home-text">
                     <br />
                     <br />
                     <br />
-                    <a class="text-light" href="/login">Accedi</a> o <a class="text-light"href="/register">Registrati</a>
+                    <a class="text-light" href="/login">Accedi</a> o <a class="text-light"
+                        href="/register">Registrati</a>
                     <br />
                     per visualizzare il catalogo!
                 </span>
